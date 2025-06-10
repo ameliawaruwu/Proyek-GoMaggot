@@ -1,5 +1,4 @@
-<?php include '../views/header.php'; ?>
-<?php
+<?php include '../views/header.php';
 include '../configdb.php';
 ?>
 

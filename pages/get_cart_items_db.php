@@ -1,4 +1,5 @@
 <?php
+include '../Logic/update/auth.php';
 session_start();
 header('Content-Type: application/json');
 

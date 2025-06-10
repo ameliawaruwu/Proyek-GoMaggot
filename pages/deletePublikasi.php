@@ -1,8 +1,7 @@
 <?php
-// Pastikan tidak ada karakter, spasi, atau baris baru di sini
 ob_start();
-
-require_once '../configdb.php';
+include '../Logic/update/auth.php';
+include '../configdb.php';
 include '../views/headeradmin.php';
 
 $message = '';

@@ -1,6 +1,5 @@
 <?php
-// include '../Logic/update/auth.php'; // Uncomment jika authentication dibutuhkan dan sudah ada
-// Sertakan header admin
+include '../Logic/update/auth.php';
 include '../configdb.php'; // Sertakan file koneksi database
 
 // Inisialisasi variabel untuk menghindari error undefined

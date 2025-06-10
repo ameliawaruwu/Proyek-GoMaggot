@@ -1,16 +1,13 @@
 <?php
-// Pastikan hanya admin yang bisa mengakses halaman ini
 include '../Logic/update/auth.php';
-// Panggil bagian kepala admin (header, navigasi samping, dll.)
 include '../views/headeradmin.php';
-// Sambungkan ke database kita dong
-include '../configdb.php'; // Pastikan ini menyediakan $conn yang aktif dan berfungsi
+include '../configdb.php'; 
 
 // Inisialisasi variabel untuk pesan feedback
 $success_message = '';
 $error_message = '';
 
-// --- Logika PHP untuk Mengambil Data Ulasan ---
+// Logika untuk Mengambil Data Ulasan ---
 $reviews = [];
 $totalReviews = 0;
 $totalPages = 1;

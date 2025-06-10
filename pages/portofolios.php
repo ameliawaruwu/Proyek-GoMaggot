@@ -1,4 +1,5 @@
-<?php include '../partials/headers.php';  ?>
+<?php
+include '../partials/headers.php';  ?>
 <?php include '../logic/update/auth.php'; ?>
 
 <link rel="stylesheet" href="/MAGGOT/css/portofolios.css">

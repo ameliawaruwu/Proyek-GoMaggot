@@ -1,4 +1,5 @@
 <?php
+include '../Logic/update/auth.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }

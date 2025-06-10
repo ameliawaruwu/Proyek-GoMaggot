@@ -1,6 +1,6 @@
 <?php
-
-require_once '../configdb.php'; // 
+include '../Logic/update/auth.php';
+include '../configdb.php'; // 
 $message = '';
 $message_type = ''; 
 $galeri = null;
