@@ -19,7 +19,6 @@
         </div>
 
         <form action="submit_feedback.php" method="POST" enctype="multipart/form-data">
-            <!-- Input tersembunyi untuk rating produk dan rating seller -->
             <input type="hidden" name="rating_produk" id="rating_produk">
             <input type="hidden" name="rating_seller" id="rating_seller">
 
