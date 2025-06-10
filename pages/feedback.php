@@ -119,7 +119,6 @@
 
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
-<<<<<<< HEAD
 <script src="s../Admin-HTML/js/script2.js"></script>
 =======
 <script src="script.js"></script>

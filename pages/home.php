@@ -1,5 +1,4 @@
 
-<?php include '../logic/update/auth.php'; ?>
 <?php include '../partials/headers.php';  ?>
 <link rel="stylesheet" href="../Admin-HTML/css/home.css">
 <link rel="stylesheet" href="../Admin-HTML/css/footer.css">
