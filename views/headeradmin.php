@@ -52,14 +52,6 @@
                     <span class="text">Chat</span>
                 </a>
             </li>
-            <!--
-            <li>
-                <a href="admin.html">
-                    <i class='bx bxs-group'></i>
-                    <span class="text">Admin</span>
-                </a>
-            </li>
-            -->
 
         </ul>
     </section>
