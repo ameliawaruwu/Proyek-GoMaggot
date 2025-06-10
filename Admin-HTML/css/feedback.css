@@ -1,0 +1,351 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Poppins';
+    scroll-behavior: smooth;
+}
+
+.section{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 12%;
+}
+
+.navbar{
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    transition: .6s;
+}
+
+.navbarSticky{
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05) ;
+    background-color: rgba(0,0,0,1);
+}
+
+.logo a{
+    font-size: 30px;
+    font-weight: 500;
+    color: #ffffff;
+    font-family: "Kaushan Script", serif;
+}
+
+.logo a span{
+    color: rgb(121,185,0);
+    font-family: "Kaushan Script", serif;
+}
+
+.navbar ul li{
+    margin-left: 35px;
+    display: inline-block;
+}
+
+.navbar ul li a{
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.navbar ul li a:hover{
+    color: rgb(121,185,0);
+    cursor: pointer;
+}
+
+.nav-btn{
+    display: flex;
+    margin-left: 90px;
+    gap: 15px;
+}
+
+.nav-btn a i{
+    background-color:rgb(121,185,0);
+    height: 40px;
+    width: 40px;
+    border-radius: 9px;
+    font-size: 1.4rem;
+    display: flex;
+}
+
+.nav-btn a i:hover{
+    cursor: pointer;
+    box-shadow: inset 5px 5px 10px rgb(121,185,0);
+    background-color: rgb(0,128,0);
+    color: #fff;
+}
+
+.nav-btn i{
+    color: rgb(255, 255, 255);
+    background-color:rgb(121,185,0);
+    height: 40px;
+    width: 40px;
+    border-radius: 9px;
+    font-size: 1.4rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+}
+
+.nav-btn i:hover{
+    cursor: pointer;
+    box-shadow: inset 5px 5px 10px rgb(121,185,0);
+    background-color: rgb(0,128,0);
+    color: #fff;
+}
+
+.navbar .ri-menu-line{
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0,128,0);
+    border-radius: 8px;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.6s;
+    display: none;
+}
+
+.navbar .ri-menu-line:hover{
+    background-color: rgb(121,185,0);
+}
+
+button{
+    width: 150px;
+    padding: 10px;
+    border: none;
+    box-shadow: inset 5px 5px 10 px rgb(142,224,142);
+    background-color: rgb(121,185,0);
+    border-radius: 30px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: .6s;
+}
+
+button:hover{
+    box-shadow: inset 5px 5px 10px rgb(121,185,0);
+    background-color: rgb(0,128,0);
+}
+
+.header-wrapper{
+    width: 100%;
+    align-items: center;
+    padding: 80px 12%;
+}
+
+.hero {
+    background: linear-gradient(to right bottom, rgba(167, 211, 178, 0.84), rgb(3, 34, 13)), 
+                url('https://source.unsplash.com/1600x900/?bandung,city') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    color: #090909;
+}
+
+.container {
+    max-width: 800px;
+    margin: 60px auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.header {
+    font-size: 2.2rem;
+    font-weight: 700;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    text-align: center;
+    color: #000000;
+}
+
+.header h3{
+    color: #000000;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+textarea {
+    resize: none;
+}
+
+.navbar + .container {
+    margin-top: 100px;
+}
+
+.stars {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 20px;
+}
+
+.star {
+    font-size: 24px;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.star.selected {
+    color: #ffc107;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input-group input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+/* Styling tombol media */
+.media-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center; /* Tombol berada di tengah */
+    margin-bottom: 20px; /* Jarak antar tombol lebih besar */
+}
+
+.media-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: rgb(121,185,0); /* Warna tombol */
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    text-align: center;
+    width: 120px;
+    border: 1px solid #ddd; /* Tambahkan border agar lebih terlihat */
+}
+
+/* Styling ikon di dalam tombol */
+.media-button i {
+    font-size: 1.5rem; /* Ukuran ikon lebih besar */
+}
+
+/* Efek saat hover */
+.media-button:hover {
+    background-color: rgb(0,128,0); /* Warna hijau saat hover */
+    transform: scale(1.05); /* Efek perbesaran sedikit saat hover */
+}
+
+/* Efek saat tombol ditekan */
+.media-button:active {
+    background-color: #3e8e41;
+    transform: scale(0.98);
+}
+
+/* Sembunyikan input file */
+input[type="file"] {
+    display: none; /* Sembunyikan input file */
+}
+
+
+/* Toggle switch styling */
+.toggle-switch {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.toggle-switch label {
+    font-size: 1rem;
+    color: #555;
+    margin-right: 10px;
+}
+
+.toggle-switch input[type="checkbox"] {
+    width: 60px;
+    height: 30px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #ddd;
+    border-radius: 20px;
+    position: relative;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.toggle-switch input[type="checkbox"]::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 4px;
+    left: 3px;
+    transition: transform 0.2s ease;
+}
+
+.toggle-switch input[type="checkbox"]:checked {
+    background-color: #4CAF50;
+}
+
+.toggle-switch input[type="checkbox"]:checked::before {
+    transform: translateX(35px);
+}
+
+.stars-section {
+    margin-bottom: 15px;
+}
+
+/* Submit button styling */
+.submit-button {
+    width: 100%;
+    padding: 15px 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: rgb(121,185,0);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-button:hover {
+    background-color: rgb(0,128,0);
+}
+
+.submit-button:active {
+    background-color: rgb(0,128,0);
+}

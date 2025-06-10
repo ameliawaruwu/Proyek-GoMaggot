@@ -1,0 +1,372 @@
+/* ../Admin-HTML/css/AdminFormGaleri.css */
+
+/* Gaya untuk kontainer form */
+.galeri-form {
+    background: var(--light);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.05);
+    max-width: 800px; /* Lebar maksimum form agar lebih sesuai screenshot */
+    margin: 20px auto; /* Tengahkan form */
+}
+
+/* Gaya untuk setiap baris form (label di kiri, input di kanan) */
+.form-row {
+    display: flex; /* Menggunakan flexbox untuk tata letak baris */
+    align-items: flex-start; /* Mengatur item agar rata atas */
+    margin-bottom: 15px; /* Jarak antar baris */
+}
+
+.form-label {
+    flex: 0 0 150px; /* Lebar tetap untuk label (sesuaikan jika perlu) */
+    padding-right: 20px; /* Jarak antara label dan input */
+    text-align: right; /* Label rata kanan */
+    padding-top: 10px; /* Sejajarkan dengan input */
+}
+
+.form-label label {
+    font-weight: bold;
+    color: var(--dark);
+    display: inline-block; /* Agar bisa diatur text-align */
+}
+
+.form-input {
+    flex-grow: 1; /* Input mengambil sisa ruang yang tersedia */
+}
+
+/* Gaya untuk input teks, file, dan textarea di dalam form-input */
+.form-input input[type="text"],
+.form-input input[type="file"],
+.form-input textarea,
+.form-input select { /* Tambahkan select jika ada dropdown */
+    width: calc(100% - 22px); /* 100% lebar dikurangi padding dan border */
+    padding: 10px;
+    border: 1px solid var(--grey);
+    border-radius: 8px;
+    font-size: 16px;
+    background: var(--light);
+    color: var(--dark);
+    box-sizing: border-box; /* Pastikan padding dan border termasuk dalam width */
+}
+
+.form-input input[type="file"] {
+    padding: 8px; /* Padding sedikit lebih kecil untuk input file */
+}
+
+.form-input textarea {
+    resize: vertical; /* Izinkan perubahan ukuran hanya secara vertikal */
+}
+
+/* Gaya untuk tombol aksi form (submit, cancel) di bagian bawah */
+.form-actions-bottom { /* Nama kelas baru agar lebih spesifik */
+    margin-top: 30px; /* Jarak lebih besar dari form content */
+    text-align: left; /* Tombol rata kiri seperti di screenshot */
+    padding-left: 170px; /* Sesuaikan dengan lebar form-label + gap */
+}
+
+.form-actions-bottom .btn-submit {
+    background-color: #007bff; /* Warna biru */
+    color: white;
+}
+.form-actions-bottom .btn-cancel {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    transition: all .3s ease; /* Jaga transisi untuk tombol ini jika diinginkan */
+    margin-right: 10px; /* Jarak antar tombol */
+}
+
+/* Gaya untuk tombol Submit/Update (Biru) */
+.form-actions-bottom .btn-submit {
+    background-color: #007bff; /* Warna biru */
+    color: white;
+}
+.form-actions-bottom .btn-submit:hover {
+    background-color: #0056b3; /* Sedikit lebih gelap saat hover */
+}
+
+
+/* Gaya untuk tombol Batal (Abu-abu) */
+.form-actions-bottom .btn-cancel {
+    background-color: #6c757d; /* Warna abu-abu */
+    color: white;
+}
+.form-actions-bottom .btn-cancel:hover {
+    background-color: #5a6268; /* Sedikit lebih gelap saat hover */
+}
+
+
+/* Gaya untuk pratinjau gambar saat ini di halaman edit */
+.current-image-preview {
+    text-align: left; /* Rata kiri */
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid var(--grey);
+    border-radius: 8px;
+    background-color: var(--light-grey);
+    display: inline-block; /* Agar lebar sesuai konten */
+}
+
+.current-image-preview img {
+    max-width: 150px;
+    height: auto;
+    display: block;
+    margin: 0; /* Hilangkan margin auto */
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gambar-saat-ini-text {
+    font-size: 0.9em;
+    color: var(--dark-grey);
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* Gaya untuk pesan status (sukses/error) dalam form */
+.form-message {
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.form-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Responsif dasar (opsional, sesuaikan breakpoint) */
+@media (max-width: 768px) {
+    .form-row {
+        flex-direction: column; /* Ubah tata letak menjadi kolom di layar kecil */
+        align-items: stretch; /* Regangkan item */
+    }
+    .form-label {
+        flex: none;
+        width: 100%;
+        text-align: left; /* Label rata kiri di layar kecil */
+        padding-right: 0;
+        margin-bottom: 5px;
+    }
+    .form-input {
+        width: 100%;
+    }
+    .form-actions-bottom {
+        padding-left: 0;
+        text-align: center; /* Tombol di tengah di layar kecil */
+    }
+    .galeri-form input[type="text"],
+    .galeri-form textarea {
+        width: 100%; /* Lebar penuh */
+    }
+}
+
+
+/* Pastikan CSS ini diletakkan setelah definisi .table-data .order di admin.css
+   atau pastikan AdminFormGaleri.css di-load SETELAH admin.css di HTML */
+
+/* Ini adalah override untuk div.order di addgaleri.php */
+.table-data .order {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+/* Gaya untuk form itu sendiri yang sebelumnya .galeri-form */
+/* Karena Anda menempatkan form di dalam .order, dan .order sudah di-override,
+   maka styling ini bisa langsung diterapkan ke form.
+   Atau, jika Anda ingin mempertahankan container box putih untuk form,
+   maka jangan override .order di atas, dan kembalikan max-width/margin auto ke .galeri-form
+*/
+.galeri-form {
+    background: var(--light); /* Latar belakang putih/terang */
+    padding: 24px; /* Sesuaikan padding form content */
+    border-radius: 20px;
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.05);
+    /* Untuk make form ini mengisi lebar penuh, tapi tetap ada padding dari .main content area */
+    max-width: 100%; /* Biarkan mengambil lebar penuh dari parent yang tersisa */
+    width: 100%;
+    margin: 0; /* Pastikan tidak ada margin auto lagi */
+}
+
+
+/* Gaya untuk setiap baris form */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: var(--dark);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="file"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--grey);
+    border-radius: 8px;
+    font-size: 16px;
+    background: var(--light);
+    color: var(--dark);
+    box-sizing: border-box;
+}
+
+.form-group input[type="file"] {
+    padding: 8px;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Gaya untuk tombol aksi form (submit, cancel) di bagian bawah */
+.form-actions {
+    margin-top: 30px;
+    text-align: left; /* Rata kiri */
+    /* Pastikan tidak ada padding-left yang aneh di sini jika form melebar */
+}
+
+.form-actions .btn-submit,
+.form-actions .btn-cancel {
+    display: inline-block;
+    padding: 10px 20px; /* JADIKAN PADDING INI SAMA UNTUK KEDUA TOMBOL */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px; /* JADIKAN FONT-SIZE INI SAMA */
+    font-weight: bold; /* Opsional: agar teks lebih tebal seperti di screenshot */
+    text-decoration: none;
+    transition: all .3s ease;
+    margin-right: 10px; /* Jarak antar tombol */
+    min-width: 120px; /* Opsional: Atur lebar minimum agar kedua tombol punya lebar visual yang serupa */
+    text-align: center; /* Pastikan teks di tengah tombol */
+    box-sizing: border-box; /* Agar padding dan border tidak menambah lebar di luar min-width */
+}
+
+/* Gaya untuk tombol Submit/Update (Biru) */
+.form-actions .btn-submit {
+    background-color: #007bff; /* Warna biru */
+    color: white; /* Warna teks putih */
+}
+.form-actions .btn-submit:hover {
+    background-color: #0056b3;
+}
+
+/* Gaya untuk tombol Batal (Abu-abu) */
+.form-actions .btn-cancel {
+    background-color: #6c757d;
+    color: white;
+}
+.form-actions .btn-cancel:hover {
+    background-color: #5a6268;
+}
+
+/* ... (Sisa CSS Anda seperti current-image-preview, form-message, media queries, dark mode) ... */
+
+/* Dark mode adjustments for AdminFormGaleri.css */
+body.dark .galeri-form {
+    background: #2c2c2c;
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+body.dark .form-group label {
+    color: var(--light);
+}
+
+body.dark .form-group input[type="text"],
+body.dark .form-group input[type="file"],
+body.dark .form-group textarea,
+body.dark .form-group select {
+    background: #3c3c3c;
+    color: var(--light);
+    border-color: #555;
+}
+
+/* Tambahan untuk dark mode tombol */
+body.dark .form-actions .btn-submit {
+    background-color: #0069d9; /* slightly different shade for dark mode if desired */
+}
+body.dark .form-actions .btn-submit:hover {
+    background-color: #0056b3;
+}
+body.dark .form-actions .btn-cancel {
+    background-color: #5a6268;
+}
+body.dark .form-actions .btn-cancel:hover {
+    background-color: #495057;
+}
+
+/* Gaya dasar untuk semua tombol */
+.button {
+    padding: 10px 20px; /* Atur padding untuk ukuran tombol */
+    border: none; /* Hilangkan border */
+    border-radius: 8px; /* Sudut membulat yang lebih besar */
+    font-size: 16px; /* Ukuran font */
+    font-weight: bold; /* Teks tebal */
+    cursor: pointer; /* Kursor pointer saat di hover */
+    color: white; /* Warna teks putih untuk semua tombol */
+    transition: background-color 0.2s ease, transform 0.1s ease; /* Transisi halus */
+    /* Untuk memastikan ukuran visual yang seragam, terutama jika ada perbedaan panjang teks yang signifikan,
+       Anda bisa mengatur lebar minimal atau lebar tetap. Namun, dengan padding yang konsisten,
+       biasanya sudah cukup. */
+    /* min-width: 80px; */ /* Contoh lebar minimal */
+    /* display: inline-block; */ /* Penting jika min-width digunakan */
+}
+
+/* Gaya untuk tombol Simpan (biru) */
+.save-button {
+    background-color: #007bff; /* Warna biru cerah */
+    margin-left: 10px; /* Jarak dari tombol Batal jika Batal di kiri */
+    /* Atur margin-right jika Simpan di kiri, atau gunakan flexbox di container */
+}
+
+.save-button:active {
+    background-color: #0056b3; /* Sedikit lebih gelap saat diklik */
+    transform: translateY(1px); /* Geser ke bawah saat diklik */
+}
+
+/* Gaya untuk tombol Batal (abu-abu gelap) */
+.cancel-button {
+    background-color: #6c757d; /* Warna abu-abu gelap */
+    margin-right: 10px; /* Jarak dari tombol Simpan jika Simpan di kanan */
+    /* Atur margin-left jika Batal di kanan */
+}
+
+.cancel-button:active {
+    background-color: #545b62; /* Sedikit lebih gelap saat diklik */
+    transform: translateY(1px); /* Geser ke bawah saat diklik */
+}
+
+/* Styling saat tombol difokuskan (untuk aksesibilitas) */
+.button:focus {
+    outline: none; /* Hilangkan outline default */
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Fokus biru untuk tombol Simpan */
+}
+
+.cancel-button:focus {
+    box-shadow: 0 0 0 3px rgba(108, 117, 125, 0.5); /* Fokus abu-abu untuk tombol Batal */
+}

@@ -1,0 +1,441 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;0,800;0,900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* GLOBAL STYLES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-image: url('https://i.pinimg.com/736x/0c/61/1a/0c611ab0e09772ae18b78f26e77a708b.jpg');
+    margin: 0;
+}
+
+.container {
+    width: 1200px;
+    margin: auto;
+    max-width: 100vw; /* Disarankan agar tidak terlalu lebar */
+    text-align: center;
+    padding-top: 20px;
+    transition: transform .5s;
+}
+
+/* HEADER */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    background-color: transparent;
+}
+
+.container .logo a {
+    font-size: 30px;
+    font-weight: 500;
+    color: #ffffff;
+    font-family: "Kaushan Script", serif;
+    text-decoration: none;
+}
+
+.container .logo span {
+    color: rgb(121, 185, 0);
+    font-family: "Kaushan Script", serif;
+    text-decoration: none;
+}
+
+.navbar {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12%;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: rgb(0, 0, 0);
+    transition: background-color 0.6s;
+}
+
+.navbarSticky {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navbar ul {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.navbar ul li {
+    margin-left: 35px;
+}
+
+.navbar ul li a {
+    color: #ffffff;
+    font-size: 17px;
+    transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+    color: rgb(121, 185, 0);
+    cursor: pointer;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-btn a i {
+    background-color: rgb(121, 185, 0);
+    height: 40px;
+    width: 40px;
+    border-radius: 9px;
+    font-size: 1.4rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.nav-btn i {
+    margin-right: 30px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(121, 185, 0);
+    height: 40px;
+    width: 40px;
+    border-radius: 9px;
+    font-size: 1.4rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+}
+
+/* svg { /* This refers to the search icon or similar */
+/* width: 33px;
+    color: white;
+    margin-left: 25%;
+} */
+
+.icon-cart {
+    display: flex;
+    align-items: center;
+    position: relative;
+    /* right: -60%; */ /* Hati-hati dengan properti ini, bisa menyebabkan overflow */
+    background-color: rgb(0, 128, 0);
+    height: 50px;
+    width: 50px;
+    border-radius: 8px;
+    margin-left: 10px;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    align-items: center;
+    top: 15%;
+    margin-left: 10px;
+}
+
+.seacrh-cart {
+    position: relative;
+}
+
+.icon-cart span {
+    position: absolute;
+    background-color: red;
+    width: 28px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    color: #fff;
+    top: 50%;
+    left: 1px;
+}
+
+.navbar .ri-menu-line {
+    height: 50px;
+    width: 50px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 128, 0);
+    border-radius: 8px;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.6s;
+}
+
+.navbar .ri-menu-line:hover {
+    background-color: rgb(121, 185, 0);
+}
+
+button {
+    width: 150px;
+    padding: 10px;
+    border: none;
+    box-shadow: inset 5px 5px 10px rgba(71, 106, 71, 0.5);
+    background-color: rgb(121, 185, 0);
+    border-radius: 30px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.6s, box-shadow 0.6s;
+}
+
+button:hover {
+    box-shadow: inset 5px 5px 10px rgba(121, 185, 0, 0.5);
+    background-color: rgb(0, 128, 0);
+}
+
+.section {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 12%;
+}
+
+#image {
+    float: left;
+    padding-top: 100px;
+    padding-left: 100px;
+    border-radius: 8px;
+}
+
+/* Styling for the "Ayo Belajar" section */
+.Sub-topik {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+    justify-content: center;
+    height: auto;
+    /* Margin untuk menggeser "Ayo Belajar" ke kanan */
+    margin: 5% 5% 5% 50%; /* Top Right Bottom Left */
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+}
+
+.Sub-topik li {
+    background-color: rgb(166, 186, 151);
+    border-radius: 20px;
+    padding: 15px 20px;
+    list-style-type: none;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 5px 10px rgba(154, 147, 138, 0.3);
+    width: 100%;
+    max-width: 400px;
+    text-align: left;
+}
+
+.Sub-topik li:hover {
+    background-color: #8bb072;
+    transform: translateY(-3px);
+}
+
+.Next-page {
+    float: right;
+}
+
+/* General styles for the h2 */
+h2 {
+    text-align: left;
+    font-size: 30px;
+    margin-bottom: 20px;
+    margin-left: 8%;
+    margin-right: 5%;
+    color: #333;
+    animation: fadeInDown 1s ease-in-out;
+}
+
+.Sub-topik + .button {
+    margin-top: 20px;
+}
+
+h3 {
+    font-size: 23px;
+    margin-bottom: 15px;
+    text-align: center; /* Pastikan judul "Artikel Kami" berada di tengah */
+    color: #333;
+}
+
+/* Container for the gallery / Artikel Kami cards */
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap; /* Mengatur agar kartu artikel bisa turun ke baris baru */
+    justify-content: center; /* Pusatkan artikel secara horizontal di dalam baris */
+    gap: 20px; /* Jarak antar kartu artikel */
+    margin-bottom: 15px;
+    /* overflow-x: auto; Hapus ini karena flex-wrap: wrap akan menghilangkan kebutuhan scroll horizontal */
+    padding: 0 10px; /* Tambahkan sedikit padding agar tidak terlalu mepet ke sisi layar */
+
+    /* Opsional: Untuk menyembunyikan scrollbar di beberapa browser (jika diinginkan) */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Opsional: Sembunyikan scrollbar untuk Webkit browsers (Chrome, Safari) */
+.gallery-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* Each gallery item (Kartu Artikel) */
+.gallery {
+    /* Perhitungan lebar agar 3 kartu per baris dengan gap 20px */
+    width: 220px; /* (Total lebar - 2 * gap) / 3 kartu */
+    max-width: 350px; /* Batasi lebar maksimum per kartu agar tidak terlalu besar di layar sangat lebar */
+    min-width: 250px; /* Batasi lebar minimum per kartu agar tidak terlalu kecil */
+    
+    border-radius: 10px; /* Border-radius untuk card */
+    overflow: hidden; /* Penting agar border-radius diterapkan pada gambar di dalamnya */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: fadeInUp 1s ease-in-out;
+    display: flex; /* Gunakan flexbox untuk tata letak konten di dalam card */
+    flex-direction: column; /* Susun item di dalam card secara vertikal */
+    justify-content: space-between; /* Mendorong tombol ke bawah dan menjaga sejajar */
+    height: auto; /* Biarkan tinggi kartu menyesuaikan kontennya */
+    background-color: #fff; /* Tambahkan background putih untuk card agar terlihat lebih jelas */
+    flex-shrink: 0; /* Mencegah item menyusut di dalam flex container */
+    margin-bottom: 20px; /* Tambahkan ini untuk jarak antar baris */
+}
+
+.gallery:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Image inside each gallery item */
+.gallery img {
+    width: 100%;
+    height: 180px; /* Atur tinggi gambar agar konsisten */
+    object-fit: cover; /* Pastikan gambar memenuhi area tanpa terdistorsi */
+    display: block;
+    transition: transform 0.3s;
+}
+
+.gallery:hover img {
+    transform: scale(1.05);
+}
+
+/* Description inside each gallery item (Judul Artikel) */
+.gallery .desc {
+    font-weight: bold; /* Untuk membuat judul bold */
+    font-size: 18px; /* Sesuaikan ukuran font judul */
+    margin: 10px 0; /* Margin atas dan bawah untuk judul */
+    padding: 0 15px; /* Padding horizontal agar teks tidak terlalu mepet ke samping */
+    text-align: center; /* Pusatkan teks judul */
+    color: #333; /* Warna teks judul */
+    flex-grow: 1; /* Agar deskripsi mengambil ruang yang tersisa, mendorong tombol ke bawah */
+    display: flex; /* Ubah .desc menjadi flex container */
+    align-items: center; /* Pusatkan teks secara vertikal dalam .desc */
+    justify-content: center; /* Pusatkan teks secara horizontal dalam .desc */
+}
+
+/* Button general style (Tombol "Pelajari Lebih Lanjut") */
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 15px;
+    font-size: 15px;
+    color: #fff;
+    background-color: rgb(105, 102, 90);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
+    position: relative;
+    overflow: hidden;
+    margin: 15px auto; /* Memberikan margin atas dan bawah serta memusatkan tombol */
+    width: 80%; /* Beri lebar yang konsisten agar tombol terlihat seragam */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* SVG icon inside the button */
+.button svg {
+    margin-left: 10px;
+    transition: transform 0.3s;
+    width: 20px; /* Sesuaikan ukuran ikon SVG */
+    height: 20px;
+    fill: white; /* Pastikan warna ikon putih */
+}
+
+/* Hover effect for button */
+.button:hover {
+    background-color: rgb(129, 174, 103);
+    transform: translateY(-2px);
+}
+
+/* Hover effect for SVG icon */
+.button:hover svg {
+    transform: translateX(5px);
+}
+
+/* Animation for button text */
+.button span {
+    position: relative;
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+/* Hover effect for button text */
+.button:hover span {
+    transform: translateX(5px);
+}
+
+/* Add a moving background effect */
+.button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: left 0.3s;
+}
+
+/* Move the background effect on hover */
+.button:hover::before {
+    left: 100%;
+}
+
+/* Keyframe animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+

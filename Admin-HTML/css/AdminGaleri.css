@@ -1,0 +1,427 @@
+/* AdminGaleri.css */
+
+/* --- Global Variables (PENTING: Pastikan ini sudah didefinisikan di admin.css atau definisi di sini jika tidak) --- */
+/*
+:root {
+    --primary-color: #3C91E6; // Biru utama
+    --secondary-color: #FD7238; // Orange (jika digunakan)
+    --accent-color: #FF7F50; // Salmon (contoh)
+
+    --light: #F9F9F9; // Background umum
+    --dark: #363949; // Teks gelap
+    --grey: #eee; // Border, background elemen ringan
+    --light-grey: #e0e0e0; // Header tabel, background elemen sedikit lebih gelap
+    --dark-grey: #808080; // Teks abu-abu gelap
+
+    --blue: #3C91E6; // Warna biru untuk tombol/highlight (ini yang kita inginkan untuk tombol Add)
+    --dark-blue: #2E72C3; // Warna biru lebih gelap (untuk hover jika ada)
+    --green: #38C738; // Warna hijau untuk status 'Available'
+
+    --red: #FF4D4D; // Warna merah untuk aksi delete (spesifik)
+    --yellow: #FFC107; // Warna kuning untuk aksi edit (spesifik)
+
+    --box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+*/
+
+/* Gaya untuk tabel data container */
+.table-data {
+    margin-top: 20px;
+}
+
+/* Container utama tabel data galeri - LATAR BELAKANG DIHAPUS */
+.table-data .galeri-management-container {
+    overflow-x: auto; /* Agar tabel bisa discroll jika terlalu lebar (tetap dipertahankan) */
+}
+
+/* --- Header Daftar Galeri (Header di dalam container galeri) --- */
+.table-data .galeri-management-container .head.galeri-management-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--grey);
+    gap: 15px;
+    background: var(--light);
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    position: relative;
+    z-index: 2;
+}
+
+.table-data .galeri-management-container .head.galeri-management-header h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--dark);
+    flex-shrink: 0;
+}
+
+/* Kotak Pencarian di header galeri */
+.table-data .galeri-management-container .head.galeri-management-header .search-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--grey);
+    border-radius: 10px;
+    overflow: hidden;
+    flex-grow: 1;
+    max-width: 300px;
+}
+
+.table-data .galeri-management-container .head.galeri-management-header .search-box .search-input {
+    border: none;
+    outline: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    flex-grow: 1;
+    background: transparent;
+    color: var(--dark);
+}
+
+.table-data .galeri-management-container .head.galeri-management-header .search-box .search-input::placeholder {
+    color: var(--dark-grey);
+}
+
+.table-data .galeri-management-container .head.galeri-management-header .search-box .search-button {
+    background: var(--blue);
+    color: var(--light);
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: background-color .2s ease;
+}
+
+.table-data .galeri-management-container .head.galeri-management-header .search-box .search-button:hover {
+    background: var(--dark-blue);
+}
+
+/* --- Tombol "Tambah Galeri Baru" di bagian atas halaman --- */
+.head-title a.btn-download {
+    background-color: #3C91E6;
+    color: #FFFFFF;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: all .3s ease;
+    flex-shrink: 0;
+}
+
+.head-title a.btn-download:hover {
+    background-color: #2E72C3;
+}
+
+.head-title a.btn-download .text {
+    color: #FFFFFF;
+    font-weight: 500;
+}
+
+
+/* --- Gaya untuk tabel itu sendiri agar baris & kolom sejajar --- */
+.table-data .galeri-management-container table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    background: var(--light);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    table-layout: fixed; /* Kunci untuk lebar kolom tetap dan alignment */
+    position: relative;
+    z-index: 1;
+}
+
+/* Menetapkan lebar kolom eksplisit */
+.table-data .galeri-management-container table thead th:nth-child(1),
+.table-data .galeri-management-container table tbody td:nth-child(1) {
+    width: 80px; /* Lebar untuk kolom ID */
+}
+
+.table-data .galeri-management-container table thead th:nth-child(2),
+.table-data .galeri-management-container table tbody td:nth-child(2) {
+    width: 120px; /* Lebar untuk kolom Gambar */
+}
+
+/* Kolom KETERANGAN (kolom ke-3) - DIUBAH AGAR BISA MEMBUNGKUS TEKS */
+.table-data .galeri-management-container table thead th:nth-child(3),
+.table-data .galeri-management-container table tbody td:nth-child(3) {
+    /* Kolom ini akan mengambil sisa lebar yang tersedia */
+    white-space: normal; /* PENTING: IZINKAN TEKS MEMBUNGKUS */
+    overflow: visible;   /* PENTING: JADIKAN VISIBLE agar teks tidak tersembunyi */
+    text-overflow: clip; /* PENTING: Hapus elipsis, karena teks akan membungkus */
+}
+
+.table-data .galeri-management-container table thead th:nth-child(4),
+.table-data .galeri-management-container table tbody td:nth-child(4) {
+    width: 150px; /* Lebar untuk kolom Aksi */
+}
+
+/* Aturan umum untuk th dan td (yang akan di-override oleh aturan nth-child jika perlu) */
+.table-data .galeri-management-container th,
+.table-data .galeri-management-container td {
+    padding: 12px 20px; /* Padding konsisten untuk th dan td */
+    border-bottom: 1px solid var(--grey);
+    text-align: left;
+    /* white-space, overflow, text-overflow akan diatur oleh nth-child atau default browser */
+    vertical-align: middle; /* PENTING: Untuk mensejajarkan konten secara vertikal di tengah */
+    min-height: 50px; /* Tinggi minimum untuk sel */
+    line-height: normal;
+}
+
+/* Hapus border bawah pada baris terakhir tabel */
+.table-data .galeri-management-container table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.table-data .galeri-management-container th {
+    background-color: var(--light-grey);
+    font-weight: 600;
+    color: var(--dark);
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+/* Gaya untuk gambar di dalam tabel agar sejajar */
+.table-data .galeri-management-container .gallery-image-cell {
+    text-align: center; /* Memusatkan gambar di dalam sel */
+}
+
+.table-data .galeri-management-container .gallery-image-cell .product-image {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    vertical-align: middle;
+    display: inline-block;
+    margin: 0 auto;
+    border: 1px solid var(--grey);
+}
+
+
+/* --- Gaya untuk tombol aksi (Edit, Delete) dan Status agar sejajar --- */
+.table-data .galeri-management-container .action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-start;
+}
+
+.table-data .galeri-management-container .status {
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--light);
+    text-align: center;
+    display: inline-block;
+    min-width: 70px;
+}
+
+.table-data .galeri-management-container .status.available {
+    background-color: var(--green);
+    color: white;
+}
+
+/* --- Ikon Aksi (Edit, Delete) - Tanpa Hover --- */
+.table-data .galeri-management-container .action-icon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    color: var(--light);
+    text-decoration: none;
+    transition: none !important;
+    transform: none !important;
+}
+
+/* Gaya spesifik untuk tombol Edit (Kuning) */
+.table-data .galeri-management-container .action-icon.edit {
+    background-color: #FFC107;
+}
+.table-data .galeri-management-container .action-icon.edit:hover {
+    background-color: #FFC107;
+    transform: none;
+}
+
+/* Gaya spesifik untuk tombol Delete (Merah) */
+.table-data .galeri-management-container .action-icon.delete {
+    background-color: #DC3545;
+}
+.table-data .galeri-management-container .action-icon.delete:hover {
+    background-color: #DC3545;
+    transform: none;
+}
+
+.table-data .galeri-management-container .action-icon i {
+    font-size: 16px;
+    margin: 0;
+}
+
+
+/* Gaya untuk pesan jika tidak ada data */
+.no-data {
+    text-align: center;
+    padding: 20px;
+    color: var(--dark-grey);
+    font-style: italic;
+    background: var(--light);
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding-bottom: 20px;
+}
+
+/* Gaya untuk pesan status (sukses/error) yang muncul dari redirect */
+.form-message {
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.form-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.form-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* --- Responsive Adjustments --- */
+@media screen and (max-width: 768px) {
+    .table-data .galeri-management-container .head {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 15px;
+        padding-right: 15px;
+        border-bottom: none;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        margin-bottom: 0;
+    }
+
+    .table-data .galeri-management-container .head.galeri-management-header .search-box {
+        width: 100%;
+        max-width: none;
+        order: 3;
+    }
+
+    .head-title .btn-download {
+        width: 100%;
+        justify-content: center;
+        margin-top: 15px;
+    }
+
+    .table-data .galeri-management-container {
+        padding: 0;
+    }
+
+    /* Mengubah tabel menjadi layout seperti kartu pada layar kecil */
+    .table-data .galeri-management-container table {
+        padding: 0;
+        border-radius: 0;
+        box-shadow: none;
+        background: transparent;
+        table-layout: auto; /* Kembali ke auto agar lebar kolom menyesuaikan konten di mobile */
+    }
+
+    /* Menghapus lebar eksplisit untuk kolom di mobile */
+    .table-data .galeri-management-container table thead th:nth-child(1),
+    .table-data .galeri-management-container table tbody td:nth-child(1),
+    .table-data .galeri-management-container table thead th:nth-child(2),
+    .table-data .galeri-management-container table tbody td:nth-child(2),
+    .table-data .galeri-management-container table thead th:nth-child(4),
+    .table-data .galeri-management-container table tbody td:nth-child(4) {
+        width: auto;
+    }
+
+    .table-data .galeri-management-container table thead {
+        display: none;
+    }
+
+    .table-data .galeri-management-container table tbody,
+    .table-data .galeri-management-container table tr,
+    .table-data .galeri-management-container table td {
+        display: block;
+        width: 100%;
+    }
+
+    .table-data .galeri-management-container table td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        min-height: unset;
+        height: auto;
+        white-space: normal;
+        text-overflow: clip;
+
+        background: var(--light);
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        margin: 0 15px 10px 15px;
+        padding: 15px 20px;
+    }
+
+    .table-data .galeri-management-container table tbody td {
+        border-bottom: none;
+    }
+
+    .table-data .galeri-management-container table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 20px;
+        font-weight: 600;
+        text-align: left;
+        color: var(--dark-grey);
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    .table-data .galeri-management-container table td:nth-of-type(1)::before { content: "ID"; }
+    .table-data .galeri-management-container table td:nth-of-type(2)::before { content: "Gambar"; }
+    .table-data .galeri-management-container table td:nth-of-type(3)::before { content: "Keterangan"; }
+    .table-data .galeri-management-container table td:nth-of-type(4)::before { content: "Aksi"; }
+
+    .table-data .galeri-management-container .gallery-image-cell {
+        text-align: right;
+        justify-content: flex-end;
+    }
+    .table-data .galeri-management-container .gallery-image-cell .product-image {
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .table-data .galeri-management-container .action-buttons {
+        justify-content: flex-end;
+    }
+}
+
+
+
+

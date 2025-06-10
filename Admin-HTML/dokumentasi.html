@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management - GoMaggot</title>
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <div class="logo">
+            <a>Go<Span>Maggot</Span></a>
+        </div>
+        <ul class="side-menu top">
+            <li class="active">
+                <a href="adminfix.html">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li class="active">
+                <a href="dokumentasi.html">
+                    <i class='bx bx-images'></i>
+                    <span class="text">Documentation</span>
+                </a>
+            </li>
+            <li>
+                <a href="publikasi.html">
+                    <i class='bx bx-library'></i>
+                    <span class="text">Publication</span>
+                </a>
+            </li>
+            <li>
+                <a href="produk.html">
+                    <i class='bx bxs-shopping-bag-alt'></i>
+                    <span class="text">Product</span>
+                </a>
+            </li>
+            <li>
+                <a href="user.html">
+                    <i class='bx bxs-user'></i>
+                    <span class="text">User</span>
+                </a>
+            </li>
+            <li>
+                <a href="chat.html">
+                    <i class='bx bxs-message-dots'></i>
+                    <span class="text">Chat</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+
+    <!-- CONTENT -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu'></i>
+            <form action="#">
+                <div class="form-input">
+                    <input type="search" placeholder="Search...">
+                    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+                </div>
+            </form>
+            <input type="checkbox" id="switch-mode" hidden>
+            <label for="switch-mode" class="switch-mode"></label>
+            <a href="#" class="notification">
+                <i class='bx bxs-bell'></i>
+                <span class="num">8</span>
+            </a>
+            <a href="#" class="profile">
+                <img src="FOTO Amelia Waruwu.jpg">
+            </a>
+        </nav>
+
+        <!-- MAIN -->
+        <main>
+            <div class="head-title">
+                <div class="left">
+                    <h1>Documentation</h1>
+                    <ul class="breadcrumb">
+                        <li><a href="#">Dashboard</a></li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li><a class="active" href="#">Dokumentasi</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="btn-download" id="addDocumentationBtn">
+                    <i class='bx bxs-plus-circle'></i>
+                    <span class="text">Add New Documentation</span>
+                </a>
+            </div>
+
+            <!-- Documentation List -->
+            <div class="documentation-list" id="documentationList">
+                <!-- Items will be dynamically added here -->
+            </div>
+
+            <!-- Add Documentation Modal -->
+            <div id="addDocumentationModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Add New Documentation</h2>
+                    <form id="documentationForm">
+                        <label for="docImage">Image:</label>
+                        <input type="file" id="docImage" name="docImage" required>
+                        
+                        <label for="docTitle">Title:</label>
+                        <input type="text" id="docTitle" name="docTitle" required>
+                        
+                        <label for="docDescription">Description:</label>
+                        <textarea id="docDescription" name="docDescription" required></textarea>
+                        
+                        <label for="docPrice">Price:</label>
+                        <input type="text" id="docPrice" name="docPrice" required>
+                        
+                        <button type="submit">Add Documentation</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <script src="script1.js"></script>
+</body>
+</html>
+    

@@ -1,0 +1,289 @@
+/* --- Variabel CSS (Pastikan ini ada di bagian atas admin.css Anda atau di :root) --- */
+/* Contoh: */
+:root {
+    --primary: #3C91E6; /* Biru utama */
+    --primary-dark: #2196F3; /* Sedikit lebih gelap */
+    --primary-light: #64B5F6; /* Sedikit lebih terang
+
+    --dark: #342E37; /* Teks gelap / background gelap */
+    --dark-bg-alt: #424242; /* Alternatif background gelap */
+    --dark-input-bg: #505050; /* Background input dark mode */
+    --dark-border: #616161; /* Border dark mode
+
+    --grey: #F0F0F0; /* Warna abu-abu terang */
+    --light: #FFFFFF; /* Warna putih */
+    --light-alt: #FAFAFA; /* Alternatif light background */
+    --light-text: #E0E0E0; /* Teks terang untuk dark mode
+
+    --blue: #3C91E6; /* Biru */
+    --blue-darker: #1565C0; /* Biru lebih gelap
+    --green: #4CAF50; /* Hijau
+    --red: #F44336;   /* Merah
+    --orange: #FFAB00; /* Oranye
+    /* ... variabel warna lainnya ... */
+}
+
+/* --- Dark Mode :root variables (jika Anda memiliki toggler Dark Mode) --- */
+body.dark {
+    --primary: #64B5F6;
+    --primary-dark: #2196F3;
+    --primary-light: #90CAF9;
+
+    --dark: #FFFFFF; /* Teks gelap di dark mode jadi putih */
+    --dark-bg-alt: #2C2C2C; /* Background alternatif di dark mode */
+    --dark-input-bg: #3A3A3A; /* Background input dark mode */
+    --dark-border: #505050; /* Border dark mode */
+
+    --grey: #3A3A3A; /* Background abu-abu terang di dark mode */
+    --light: #1A1A1A; /* Background utama dark mode */
+    --light-alt: #252525; /* Alternatif light background di dark mode */
+    --light-text: #E0E0E0; /* Teks terang di dark mode */
+    
+    --blue: #2196F3;
+    --blue-darker: #1976D2;
+    --green: #66BB6A;
+    --red: #EF5350;
+    --orange: #FFA726;
+}
+
+
+/* --- Styling untuk Dropdown Analitik (Sudah ada, tapi ini versi penyempurnaan) --- */
+.analytics-dropdown {
+    /* Ukuran & Padding */
+    padding: 10px 15px; /* Sedikit lebih banyak padding untuk "kenyamanan" visual */
+    width: 180px;      /* Lebar tetap, bisa disesuaikan */
+    min-width: 120px;  /* Batas lebar minimum agar tidak terlalu kecil */
+    max-width: 100%;   /* Pastikan tidak melebihi lebar kontainer */
+
+    /* Border & Sudut */
+    border: 1px solid var(--grey); /* Gunakan variabel CSS jika ada, fallback ke #ccc */
+    border-radius: 10px; /* Sudut lebih membulat untuk tampilan modern */
+
+    /* Warna & Teks */
+    background-color: var(--light); /* Warna latar belakang */
+    color: var(--dark);         /* Warna teks */
+    font-family: 'Poppins', sans-serif; /* Asumsi font Poppins atau font utama dashboard Anda */
+    font-size: 14px;
+    font-weight: 500; /* Sedikit lebih tebal */
+    line-height: 1.5; /* Spasi baris untuk keterbacaan */
+
+    /* Interaksi */
+    cursor: pointer;
+    outline: none; /* Hilangkan outline default saat focus */
+    transition: all 0.3s ease; /* Transisi halus untuk efek hover/focus */
+
+    /* Menghilangkan Gaya Default Browser */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    /* Ikon Panah Kustom (menggunakan SVG inline) */
+    background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%236B7280%22%20d%3D%22M7.293%204.707a1%201%200%20011.414%200l2%202a1%201%200%20010%201.414l-2%202a1%201%200%2001-1.414-1.414L8.586%207H2a1%201%200%20110-2h6.586L7.293%204.707z%22%2F%3E%3C%2Fsvg%3E'); /* Default arrow color (medium grey) */
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Posisi panah lebih ke dalam */
+    background-size: 12px; /* Ukuran panah */
+}
+
+/* Efek Hover */
+.analytics-dropdown:hover {
+    border-color: var(--primary); /* Warna border saat hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Sedikit shadow saat hover, lebih subtle */
+    transform: translateY(-1px); /* Efek sedikit naik */
+}
+
+/* Efek Focus */
+.analytics-dropdown:focus {
+    border-color: var(--primary); /* Warna border saat focus */
+    box-shadow: 0 0 0 3px var(--primary-light); /* Ring biru saat focus, gunakan light version */
+}
+
+/* Styling untuk option di dalam select (tergantung browser, ini lebih sulit diatur) */
+.analytics-dropdown option {
+    background-color: var(--light);
+    color: var(--dark);
+    padding: 10px; /* Padding untuk opsi */
+}
+
+/* --- Dark Mode Adjustments untuk Dropdown --- */
+body.dark .analytics-dropdown {
+    background-color: var(--dark-input-bg); /* Background lebih gelap untuk dark mode */
+    color: var(--light-text);   /* Teks lebih terang */
+    border-color: var(--dark-border); /* Border lebih terang */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow yang lebih menonjol di dark mode */
+
+    /* Ikon Panah Putih untuk Dark Mode */
+    background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Cpath%20fill%3D%22%23E0E0E0%22%20d%3D%22M7.293%204.707a1%201%200%20011.414%200l2%202a1%201%200%20010%201.414l-2%202a1%201%200%2001-1.414-1.414L8.586%207H2a1%201%200%20110-2h6.586L7.293%204.707z%22%2F%3E%3C%2Fsvg%3E'); /* Light grey arrow for dark mode */
+}
+
+body.dark .analytics-dropdown:hover {
+    border-color: var(--primary-light); /* Border lebih gelap saat hover di dark mode */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Shadow lebih kuat */
+}
+
+body.dark .analytics-dropdown:focus {
+    box-shadow: 0 0 0 3px var(--primary-light); /* Ring biru saat focus di dark mode */
+}
+
+/* --- Styling Tambahan untuk Filter Section secara Keseluruhan --- */
+.filter-section {
+    background-color: var(--light);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08); /* Shadow yang lebih lembut dan elegan */
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px; /* Jarak antar elemen filter lebih besar */
+    align-items: flex-end; 
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    font-size: 13px; /* Ukuran label sedikit lebih kecil */
+    color: var(--dark);
+    margin-bottom: 8px; /* Jarak label ke input */
+    font-weight: 600; /* Sedikit tebal */
+}
+
+.filter-group input[type="text"] {
+    padding: 10px 15px; /* Padding sama dengan dropdown */
+    border: 1px solid var(--grey);
+    border-radius: 10px; /* Border radius sama dengan dropdown */
+    background-color: var(--light);
+    color: var(--dark);
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.filter-group input[type="text"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.filter-group.search-box {
+    flex-direction: row; 
+    align-items: center;
+    /* Hilangkan gap di sini, biarkan button menempel input */
+}
+
+.filter-group.search-box input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    width: 220px; /* Sedikit lebih lebar */
+    padding-right: 0; /* Hapus padding kanan agar button menempel */
+    border-right: none; /* Hapus border kanan agar button menempel */
+}
+
+.filter-group.search-box button {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 10px; /* Sesuaikan radius */
+    border-bottom-right-radius: 10px;
+    padding: 10px 15px; /* Padding sama dengan input */
+    background-color: var(--primary); 
+    color: var(--light);
+    border: 1px solid var(--primary);
+    cursor: pointer;
+    font-size: 18px; /* Ikon lebih besar */
+    transition: all 0.3s ease;
+}
+
+.filter-group.search-box button:hover {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.btn-secondary, .btn-primary { /* Menggabungkan styling umum untuk tombol */
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap; /* Mencegah teks wrap */
+}
+
+.btn-secondary {
+    background-color: var(--light-alt); /* Warna yang lebih soft */
+    color: var(--dark);
+    border: 1px solid var(--grey);
+}
+.btn-secondary:hover {
+    background-color: var(--grey);
+    color: var(--dark);
+}
+
+/* --- Dark Mode Adjustments untuk Filter Section --- */
+body.dark .filter-section {
+    background-color: var(--dark-bg-alt);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+body.dark .filter-group label,
+body.dark .filter-group input[type="text"] {
+    color: var(--light-text);
+    background-color: var(--dark-input-bg);
+    border-color: var(--dark-border);
+}
+
+body.dark .filter-group input[type="text"]:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+body.dark .btn-secondary {
+    background-color: var(--dark-input-bg);
+    color: var(--light-text);
+    border-color: var(--dark-border);
+}
+
+body.dark .btn-secondary:hover {
+    background-color: var(--dark-border);
+}
+
+/* --- Optional: Styling untuk Notifikasi di Header (jika ada) --- */
+/* Jika Anda punya notification bell di header yang pakai class 'notification-icon' */
+.notification-icon .badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: var(--red); /* Warna merah untuk notifikasi */
+    color: var(--light);
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sedikit shadow */
+}
+
+/* Notifikasi Dropdown (jika ada) */
+.notifications-dropdown {
+    /* ... (CSS yang sudah ada) ... */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15); /* Shadow lebih kuat */
+    border: 1px solid var(--grey);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+body.dark .notifications-dropdown {
+    background-color: var(--dark-bg-alt);
+    border-color: var(--dark-border);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+body.dark .notifications-dropdown h4,
+body.dark .notifications-dropdown ul li a {
+    color: var(--light-text);
+}
+body.dark .notifications-dropdown ul li a:hover {
+    background-color: var(--dark-input-bg);
+}

@@ -1,0 +1,601 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* --- Global Styles --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif; /* Tambahkan sans-serif sebagai fallback */
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: white; /* Default background */
+    margin: 0 auto;
+    font-family: sans-serif;
+    width: 100%;
+    background-image: url('https://i.pinimg.com/736x/0c/61/1a/0c611ab0e09772ae18b78f26e77a708b.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+/* --- Container & Header --- */
+.container {
+    width: 1200px;
+    margin: auto;
+    max-width: 90vw;
+    text-align: center;
+    padding-top: 20px;
+    transition: transform .5s;
+}
+
+.container .logo a {
+    font-size: 30px;
+    font-weight: 500;
+    color: #ffffff;
+    font-family: "Kaushan Script", serif;
+    text-decoration: none;
+}
+.container .logo span {
+    color: rgb(121, 185, 0);
+    font-family: "Kaushan Script", serif;
+    text-decoration: none;
+}
+
+svg {
+    width: 33px;
+    color: white;
+    margin-left: 25%;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+/* --- Icon Cart & Search --- */
+.icon-cart {
+    display: flex;
+    align-items: center;
+    position: relative;
+    right: -60%;
+    background-color: rgb(0, 128, 0);
+    height: 50px;
+    width: 50px;
+    border-radius: 8px;
+    margin-left: 10px;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    align-items: center;
+    top: 15%; 
+    margin-left: 10px;
+}
+.seacrh-cart {
+    position: relative;
+}
+
+.icon-cart span{
+    position: absolute;
+    background-color: red;
+    width: 28px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    color: #fff;
+    top: 50%;
+    left: 1px;
+}
+
+/* --- Navbar --- */
+.navbar {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12%;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: rgb(0, 0, 0);
+    transition: background-color 0.6s;
+}
+
+.navbarSticky {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navbar .logo a {
+    font-size: 30px;
+    font-weight: 500;
+    color: #ffffff;
+    font-family: "Kaushan Script", serif;
+}
+.navbar .logo a span {
+    color: rgb(121, 185, 0);
+    font-family: "Kaushan Script", serif;
+}
+
+.navbar ul {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.navbar ul li {
+    margin-left: 35px;
+}
+
+.navbar ul li a {
+    color: #ffffff;
+    font-size: 17px;
+    transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+    color: rgb(121, 185, 0);
+    cursor: pointer;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.nav-btn a i {
+    background-color: rgb(121, 185, 0);
+    height: 40px;
+    width: 40px;
+    border-radius: 9px;
+    font-size: 1.4rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.nav-btn i {
+    margin-right: 30px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(121, 185, 0);
+    height: 40px;
+    width: 40px;
+    border-radius: 9px;
+    font-size: 1.4rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+}
+
+.navbar .ri-menu-line {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 128, 0);
+    border-radius: 8px;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.6s;
+    display: none;
+}
+
+.navbar .ri-menu-line:hover {
+    background-color: rgb(121, 185, 0);
+}
+
+button {
+    width: 150px;
+    padding: 10px;
+    border: none;
+    box-shadow: inset 5px 5px 10px rgba(71, 106, 71, 0.5);
+    background-color: rgb(121, 185, 0);
+    border-radius: 30px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.6s, box-shadow 0.6s;
+}
+
+button:hover {
+    box-shadow: inset 5px 5px 10px rgba(121, 185, 0, 0.5);
+    background-color: rgb(0, 128, 0);
+}
+
+/* --- Section Content (Artikel) --- */
+.section {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 12%;
+}
+
+.Atas {
+    background-color: white;
+    border-radius: 15px;
+    margin: 20px auto;
+    width: 70%;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    text-align: left;
+}
+
+/* --- PERBAIKAN UTAMA UNTUK BLOK JUDUL (.isi) --- */
+.isi {
+    background-color: rgb(136, 128, 110);
+    border-radius: 20px;
+    max-width: calc(100% - 40px);
+    width: auto;
+    padding: 20px;
+    margin: 20px 20px 30px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.isi h4, .isi p, .isi a, .isi span {
+    color: #fff;
+}
+
+.isi a {
+    color: rgb(121, 185, 0);
+}
+
+/* --- PERBAIKAN UNTUK GAMBAR MAGGOT (#image1) --- */
+#image1 { /* ID ini sekarang langsung ada di tag <img> */
+    float: left; /* Mengapung ke kiri */
+    margin: 0 15px 10px 0; /* Margin: atas(0), kanan(15px), bawah(10px), kiri(0) */
+    max-width: 25%; /* UKURAN GAMBAR AGAK KECIL (25% dari lebar kontainer) */
+    height: auto; /* Penting untuk menjaga rasio aspek */
+    border-radius: 15px; /* Sudut membulat */
+    border: 1px solid #ddd; /* Border tipis */
+    display: block; /* Agar float bekerja dengan baik dan menghilangkan spasi kosong di bawah gambar */
+}
+
+/* --- CSS untuk Gambar Ayam (#image2) --- */
+#image2 { /* Target div container #image2 */
+    float: right;
+    margin: 0 0 15px 25px; /* Margin: atas(0), kanan(0), bawah(15px), kiri(25px) */
+    max-width: 35%; /* Ukuran bisa disesuaikan agar sepadan, mungkin lebih besar dari maggot */
+    box-sizing: border-box;
+}
+#image2 img { /* Gambar di dalam div #image2 mengambil lebar penuh dari div-nya */
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    display: block;
+}
+
+
+.deskripsi {
+    background-color: white;
+    border-radius: 15px;
+    text-align: justify;
+    padding: 20px;
+    margin-top: 20px;
+    overflow: hidden; /* SANGAT PENTING untuk mengatasi float gambar agar konten di bawahnya tidak naik */
+    color: #333;
+}
+.deskripsi h4, .deskripsi h3 {
+    font-size: 1.5em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+
+.kaki {
+    background-color: rgb(136, 128, 110);
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
+
+/* --- FOOTER --- */
+.footer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    background-image: url('../images/footer-bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    padding: 20px 12% 0;
+    margin-top: 50px;
+    color: #fff;
+}
+
+.footer_top {
+    width: 70%;
+    height: 45px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    background-image: url(brand-bg.jpg);
+    padding: 2% 3%;
+    border-radius: 40px;
+    margin: 0 auto;
+}
+.footer_top h1 { font-size: 1.2rem; font-weight: 500; }
+.footer_follow { display: flex; align-items: center; gap: 10px; }
+.footer_follow h2 { font-size: 1.2rem; font-weight: 400; }
+.footer_social { display: flex; align-items: center; gap: 5px; }
+.footer_social i {
+    width: 40px; height: 35px; display: flex; justify-content: center;
+    align-items: center; background-color: #fff; color: #000;
+    font-size: 1.5rem; border-radius: 5px; transition: .3s;
+}
+.footer_social i:hover { color: #fff; background-color: #000; cursor: pointer; }
+.footer_grid {
+    margin-top: 10px; width: 100%; display: grid; grid-template-columns: repeat(4, 1fr);
+    place-content: start; place-items: start; gap: 10px; color: #fff;
+}
+.footer_col { width: 100%; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start; }
+.footer_col h3 { font-size: 1rem; font-weight: 300; margin: 10px 0; }
+.footer_col a { color: #fff; }
+.footer_col a span { color: rgb(0, 128, 0); }
+.footer_col p { font-size: 1rem; margin: 10px 0; font-weight: 300; }
+.footer_col h2 { font-size: 2rem; font-weight: 300; margin-bottom: 15px; }
+.footer_col a { margin: 5px 0; transition: .3s; }
+.footer_col a i { color: rgb(0, 128, 0); font-size: 1.2rem; }
+.footer_col a:hover { color: rgb(0, 128, 0); }
+.footer_col input {
+    width: 100%; height: 50px; border: none; outline: none; margin: 10px 0;
+    background-color: transparent; border: 1px solid rgb(0, 128, 0); color: #fff;
+    font-size: 1.2rem; border-radius: 15px; padding-left: 5%; transition: .3s;
+}
+.footer_col input::placeholder {
+    color: #fff;
+}
+
+.footer_col input:active, .footer_col input:focus { outline: rgb(121, 185, 0); }
+.footer_col button { width: 60%; height: 50px; border-radius: 15px; font-size: 1.2rem; }
+.footer_bottom {
+    width: 60%; border-top: 1px solid #fff; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center; padding: 1%;
+    margin-top: 20px;
+}
+.footer_bottom p { color: #fff; font-size: 1rem; }
+.footer_bottom p a { color: rgb(121, 185, 0); }
+.footer_bottom p a:hover { color: rgb(0, 128, 0); }
+
+
+/* --- Media Queries (Responsivitas) --- */
+@media (max-width: 1600px) {
+    .sosial { left: -6%; }
+}
+
+@media (max-width: 1400px) {
+    .navbar ul li a { font-size: 16px; }
+    .header-content { padding-left: 30px; }
+    .header-wrapper { background-position: top; }
+    .about-content h1 { margin-top: 30px; font-size: 30px; line-height: 45px; }
+}
+
+@media (max-width: 1100px) {
+    .navbar ul {
+        position: absolute; top: 100%; left: -100%; width: 100%;
+        transition: .6s; background-color: rgba(0, 0, 0, 1);
+    }
+    .navbar ul li { display: block; margin: 8px 0; padding-left: 12% !important; padding: 20px 0; }
+    .nav-btn { display: flex; }
+    .navbar ul li a { color: rgb(121, 185, 0); }
+    .navbar ul li a:hover { color: #ffffff; }
+    .navbar .showmenu { left: 0; }
+    .navbar .ri-menu-line { display: flex; }
+    .sosial { left: -5%; margin-top: 25px; }
+    .about { flex-direction: column; align-items: flex-start; }
+    .footer_top { flex-direction: column; gap: 10px; }
+    .footer_grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 900px) {
+    .sosial { left: -15%; }
+    .header-content p { width: 50%; }
+    .header-content h1 { font-size: 3rem; line-height: 3.5rem; }
+    .footer_grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .container { width: 90%; margin: auto; }
+    .listProduct { width: 90%; }
+    .header-content p { width: 90%; position: absolute; }
+    .header-content h1 { font-size: 25px; }
+    .about-image { width: 100%; }
+    .about-image img { width: 100%; }
+    .navbar ul { display: none; }
+    .navbar .ri-menu-line { display: flex; }
+
+    /* Penyesuaian untuk .isi di mobile */
+    .isi {
+        max-width: 90%;
+        margin: 20px auto;
+        padding: 15px;
+    }
+    /* Penyesuaian untuk gambar di mobile */
+    #image1, #image2 { /* #image1 sekarang adalah img, jadi tetap target id-nya */
+        float: none; 
+        max-width: 100%; 
+        margin: 10px auto; 
+        padding: 0;
+        size: 250px;
+    }
+    #image2 img { /* Target img di dalam #image2 untuk mobile */
+        float: none; /* pastikan tidak ada float di sini juga */
+        max-width: 100%;
+        margin: 10px auto;
+        padding: 0;
+    }
+}
+
+@media (max-width: 500px) {
+    .header-content p { width: 90%; }
+    .social { left: -25%; }
+    .header.btns span, .nav-btn i:nth-of-type(1) { display: none; }
+    .nav-btn i { margin-right: 0px; }
+    .footer_grid { grid-template-columns: repeat(1, 1fr); }
+}
+
+/* Media Query untuk layar sangat kecil (handphone) */
+@media only screen and (max-width: 600px) {
+    .navbar { flex-direction: column; align-items: center; padding: 10px; }
+    .menu { flex-direction: column; padding: 0; margin: 0; width: 100%; }
+    .menu li { margin: 5px 0; text-align: center; }
+
+    .Atas {
+        text-align: center; padding: 10px; width: 95%;
+    }
+
+    /* Ini juga akan mengatur gambar di mobile */
+    #image1, #image2 {
+        width: 100%; height: auto; float: none;
+        margin: 10px auto; padding: 0;
+    }
+    #image2 img {
+        width: 100%; height: auto; float: none;
+        margin: 10px auto; padding: 0;
+    }
+
+    .deskripsi { padding: 10px; border-radius: 15px; }
+    .deskripsi h4 { font-size: 1.2em; }
+    .deskripsi p { font-size: 0.9em; }
+    .kaki { text-align: center; padding: 10px; }
+    .footer { padding: 20px; text-align: center; }
+    .footer_grid { flex-direction: column; grid-template-columns: 1fr; place-items: center; }
+    .footer_col { margin-bottom: 20px; align-items: center; }
+    .footer_social { display: flex; justify-content: center; gap: 10px; }
+}
+
+
+
+
+
+/* --- PERBAIKAN UTAMA UNTUK GAMBAR PEMBUKA ARTIKEL (maggot.jpg) --- */
+.gambar-maggot-pembuka { /* Class baru untuk gambar pertama */
+    float: left;         /* Membuat gambar mengapung ke kiri */
+    width: 250px;        /* Mengatur lebar gambar menjadi 250px */
+    height: auto;        /* Biarkan tinggi menyesuaikan rasio aspek */
+    border-radius: 15px; /* Memberikan border radius */
+    margin-right: 20px;  /* Jarak ke kanan gambar agar teks tidak menempel */
+    margin-bottom: 10px; /* Jarak di bawah gambar */
+    object-fit: cover;   /* Memastikan gambar mengisi area tanpa distorsi (cropping mungkin terjadi) */
+    display: block;      /* Penting untuk float */
+}
+
+/* --- Gaya untuk kontainer teks yang akan di-float di samping gambar pembuka --- */
+/* Mungkin tidak perlu gaya spesifik di sini, karena float gambar akan mendorong teks */
+.konten-float-kanan {
+    /* Jika perlu mengatur lebar maksimal konten ini agar tidak terlalu lebar */
+    /* max-width: calc(100% - 250px - 20px); */ /* Lebar kontainer - lebar gambar - margin kanan gambar */
+    overflow: hidden; /* Penting untuk containment dalam kasus float */
+}
+
+
+/* --- Untuk gambar kedua (Maggot1.jpg) agar tetap float ke kanan --- */
+#gambarArtikelKanan {
+    float: right; /* Membuat gambar mengapung ke kanan */
+    margin-left: 20px; /* Memberi jarak antara gambar dan teks di sebelah kirinya */
+    margin-bottom: 15px; /* Memberi jarak di bawah gambar jika ada elemen lain di bawahnya */
+    max-width: 40%; /* Mengatur lebar maksimum gambar agar tidak terlalu besar */
+    height: auto; /* Memastikan rasio aspek gambar tetap terjaga */
+    border-radius: 5px; /* Opsi: sedikit sudut melengkung */
+    display: block; /* Penting untuk float */
+}
+
+
+/* Pastikan ada atau tambahkan clearfix jika belum ada */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Pastikan div .box memiliki overflow: hidden untuk menampung float di dalamnya */
+.box {
+    /* ... properti yang sudah ada ... */
+    overflow: hidden; /* SANGAT PENTING untuk menampung float dan mencegah collapse */
+    /* ... properti yang sudah ada ... */
+}
+
+/* Hapus atau komentari gaya lama yang mungkin bentrok */
+/* Jika Anda sebelumnya punya .gambar-utama-artikel img atau .gambar-float-kiri, hapus/nonaktifkan */
+/* .gambar-utama-artikel img { ... } */
+/* .gambar-float-kiri { ... } */
+
+/* --- PERBAIKAN UTAMA UNTUK GAMBAR PEMBUKA ARTIKEL 3 (#image1) --- */
+#image1 {
+    float: left;         /* Membuat div #image1 mengapung ke kiri */
+    width: 300px;        /* Mengatur lebar div container gambar */
+    height: auto;        /* Tinggi div menyesuaikan isi */
+    margin-right: 20px;  /* Jarak ke kanan div agar teks tidak menempel */
+    margin-bottom: 20px; /* Jarak di bawah div */
+    /* text-align: center; */ /* Tidak perlu jika gambar di dalam div ini diatur lebarnya */
+}
+
+#image1 img { /* Atur gambar di dalam div #image1 */
+    width: 100%;         /* Gambar mengisi lebar penuh div induknya (300px) */
+    height: 250px;       /* Mengatur tinggi gambar menjadi 250px */
+    border-radius: 30px; /* Memberikan border radius */
+    object-fit: cover;   /* Memastikan gambar mengisi area tanpa distorsi (cropping mungkin terjadi) */
+    display: block;      /* Penting untuk mengatur margin/float */
+    /* padding-right: 20px; */ /* Ini tidak efektif dengan float, gunakan margin-right pada induknya */
+    /* margin-left: 30px; */ /* Ini juga tumpang tindih dengan float */
+    /* margin-top: 10px; */ /* Biarkan ini jika Anda ingin jarak dari atas */
+}
+
+/* --- Untuk clearfix baru yang spesifik untuk skenario ini --- */
+.clearfix-artikel3-pembuka::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* --- Untuk div image2 (yang berisi 3 gambar) agar tampilannya tetap rapi di tengah/bawah --- */
+/* (Tidak ada perubahan signifikan di sini, hanya memastikan konsisten) */
+#image2 {
+    text-align: center; /* Untuk menengahkan gambar-gambar di dalamnya */
+    margin: 20px 0; /* Jarak atas dan bawah */
+    overflow: hidden; /* Penting untuk membersihkan float jika gambar di dalamnya di-float */
+}
+#image2 img {
+    width: 250px; /* Lebar sesuai yang Anda atur di HTML */
+    height: 200px; /* Tinggi sesuai yang Anda atur di HTML */
+    border-radius: 35px; /* Sedikit border radius */
+    margin: 10px; /* Jarak antar gambar */
+    display: inline-block; /* Agar bisa diatur dengan text-align: center pada induknya */
+    object-fit: cover;
+    float: none; /* Pastikan tidak ada float yang tidak diinginkan di sini */
+}
+
+
+/* Pastikan div .box memiliki overflow: hidden untuk menampung float di dalamnya */
+.box {
+    /* ... properti yang sudah ada ... */
+    overflow: hidden; /* SANGAT PENTING untuk menampung float dan mencegah collapse */
+    /* ... properti yang sudah ada ... */
+}
+
+/* Hapus atau komentari gaya lama yang mungkin bentrok untuk #image1 jika masih ada,
+   kecuali definisi float yang sekarang digunakan */
+/* .gambar-maggot-pembuka { ... } jika sudah ada definisi lama */
+

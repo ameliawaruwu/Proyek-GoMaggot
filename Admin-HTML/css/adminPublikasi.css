@@ -1,0 +1,425 @@
+   /* --- Global Variables (Perlu ada di admin.css atau tempel di sini jika tidak ada) --- */
+    /* Saya asumsikan variabel ini sudah ada di admin.css */
+    /* Jika tidak, tambahkan di awal <style> tag ini */
+    :root {
+        --primary-color: #3C91E6; /* Biru utama */
+        --secondary-color: #FD7238; /* Orange (jika digunakan) */
+        --accent-color: #FF7F50; /* Salmon (contoh) */
+
+        --light: #F9F9F9; /* Background umum */
+        --dark: #363949; /* Teks gelap */
+        --grey: #eee; /* Border, background elemen ringan */
+        --light-grey: #e0e0e0; /* Header tabel, background elemen sedikit lebih gelap */
+        --dark-grey: #808080; /* Teks abu-abu gelap */
+
+        --blue: #3C91E6; /* Warna biru untuk tombol/highlight (ini yang kita inginkan untuk tombol Add) */
+        --dark-blue: #2E72C3; /* Warna biru lebih gelap (untuk hover jika ada) */
+        
+
+        --red: #FF4D4D; /* Warna merah untuk aksi delete (spesifik) */
+        --yellow: #FFC107; /* Warna kuning untuk aksi edit (spesifik) */
+
+        --box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+
+    /* Gaya untuk tabel data container */
+    .table-data {
+        margin-top: 20px;
+    }
+
+    /* Container utama tabel data - Perubahan dari galeri-management-container ke .order */
+    .table-data .order { /* Menggunakan .order karena itu container tabel Anda */
+        overflow-x: auto; /* Agar tabel bisa discroll jika terlalu lebar (tetap dipertahankan) */
+        /* Hapus properti background, border-radius, box-shadow dari sini
+           jika .order sudah punya style global di admin.css */
+        /* background: var(--light); */
+        /* border-radius: 20px; */
+        /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); */
+    }
+
+    /* --- Header Daftar Artikel --- */
+    .table-data .order .head { /* Menggunakan .order .head */
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--grey);
+        gap: 15px;
+        background: var(--light); /* Tambahkan background jika head tidak memiliki */
+        padding-top: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        position: relative;
+        z-index: 2;
+    }
+
+    .table-data .order .head h3 { /* Menggunakan .order .head h3 */
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--dark);
+        flex-shrink: 0;
+    }
+
+    /* Kotak Pencarian di header */
+    .table-data .order .head .search-form .search-box { /* Sesuaikan selector */
+        display: flex;
+        align-items: center;
+        border: 1px solid var(--grey);
+        border-radius: 10px;
+        overflow: hidden;
+        flex-grow: 1;
+        max-width: 300px;
+    }
+
+    .table-data .order .head .search-form .search-box .search-input { /* Sesuaikan selector */
+        border: none;
+        outline: none;
+        padding: 8px 12px;
+        font-size: 14px;
+        flex-grow: 1;
+        background: transparent;
+        color: var(--dark);
+    }
+
+    .table-data .order .head .search-form .search-box .search-input::placeholder { /* Sesuaikan selector */
+        color: var(--dark-grey);
+    }
+
+    .table-data .order .head .search-form .search-box .search-button { /* Sesuaikan selector */
+        background: var(--light);
+        color: var(--light);
+        border: none;
+        padding: 8px 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition: background-color .2s ease;
+    }
+
+    .table-data .order .head .search-form .search-box .search-button:hover { /* Sesuaikan selector */
+        background: var(--dark-blue);
+    }
+
+    /* --- Tombol "Add New Artikel" di bagian atas halaman --- */
+    .head-title a.btn-download {
+        background-color: #3C91E6;
+        color: #FFFFFF;
+        border-radius: 25px;
+        padding: 10px 20px;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        transition: all .3s ease;
+        flex-shrink: 0;
+    }
+
+    .head-title a.btn-download:hover {
+        background-color: #2E72C3;
+    }
+
+    .head-title a.btn-download .text {
+        color: #FFFFFF;
+        font-weight: 500;
+    }
+
+
+    /* --- Gaya untuk tabel itu sendiri agar baris & kolom sejajar --- */
+    .table-data .order table { /* Menggunakan .order table */
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        background: var(--light);
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        table-layout: fixed; /* Kunci untuk lebar kolom tetap dan alignment */
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Menetapkan lebar kolom eksplisit (Disini Kuncinya) */
+    .table-data .order table thead th:nth-child(1),
+    .table-data .order table tbody td:nth-child(1) {
+        width: 60px; /* Lebar untuk kolom ID, sedikit lebih lebar dari 4% */
+        text-align: center; /* Pusatkan ID */
+        background-color: transparent; /* Pastikan tidak ada background tambahan */
+    }
+
+    .table-data .order table thead th:nth-child(2),
+    .table-data .order table tbody td:nth-child(2) {
+        width: 18%; /* Lebar untuk kolom Judul */
+    }
+
+    .table-data .order table thead th:nth-child(3),
+    .table-data .order table tbody td:nth-child(3) {
+        width: 12%; /* Lebar untuk kolom Penulis */
+    }
+
+    .table-data .order table thead th:nth-child(4),
+    .table-data .order table tbody td:nth-child(4) {
+        width: 100px; /* Lebar untuk kolom Tanggal, pakai px untuk presisi */
+    }
+
+    /* Kolom KONTEN (kolom ke-5) - DIUBAH AGAR BISA MEMBUNGKUS TEKS DAN MAKSIMALKAN RUANG */
+    .table-data .order table thead th:nth-child(5),
+    .table-data .order table tbody td:nth-child(5) {
+        /* Kolom ini akan mengambil sisa lebar yang tersedia dari kolom fixed width.
+           Kita bisa mencoba auto, tapi dengan fixed-layout, kita harus set widthnya.
+           Mari kita coba persentase yang besar dan izinkan wrapping. */
+        width: 35%; /* Beri ruang yang besar untuk konten */
+        white-space: normal; /* PENTING: IZINKAN TEKS MEMBUNGKUS */
+        overflow: visible;  /* PENTING: JADIKAN VISIBLE agar teks tidak tersembunyi */
+        text-overflow: clip; /* PENTING: Hapus elipsis, karena teks akan membungkus */
+    }
+
+    .table-data .order table thead th:nth-child(6),
+    .table-data .order table tbody td:nth-child(6) {
+        width: 80px; /* Lebar untuk kolom Hak Cipta, pakai px */
+    }
+
+    .table-data .order table thead th:nth-child(7),
+    .table-data .order table tbody td:nth-child(7) {
+        width: 120px; /* Lebar untuk kolom Aksi, pakai px */
+        text-align: center; /* Pusatkan header Aksi */
+    }
+
+    /* Aturan umum untuk th dan td (yang akan di-override oleh aturan nth-child jika perlu) */
+    .table-data .order th,
+    .table-data .order td {
+        padding: 12px 20px; /* Padding konsisten untuk th dan td (dari galeri.css) */
+        border-bottom: 1px solid var(--grey);
+        text-align: left;
+        vertical-align: middle; /* PENTING: Untuk mensejajarkan konten secara vertikal di tengah */
+        min-height: 50px; /* Tinggi minimum untuk sel */
+        line-height: normal;
+        box-sizing: border-box; /* Konsisten */
+    }
+
+    /* Hapus border bawah pada baris terakhir tabel */
+    .table-data .order table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .table-data .order th {
+        background-color: var(--light-grey);
+        font-weight: 600;
+        color: var(--dark);
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+
+    
+    /* --- Gaya untuk tombol aksi (Edit, Delete) agar sejajar dan warna statis --- */
+    .table-data .order .action-buttons {
+        display: flex;
+        align-items: center;
+        gap: 8px; /* Jarak antar tombol */
+        justify-content: center; /* PENTING: Pusatkan di kolom Aksi */
+        height: 100%; /* Memastikan flexbox mengisi tinggi sel */
+        min-height: 50px; /* Sesuaikan dengan min-height sel */
+        flex-wrap: nowrap;
+        flex-shrink: 0;
+    }
+
+    /* --- Ikon Aksi (Edit, Delete) - Tanpa Hover --- */
+    .table-data .order .action-icon {
+        width: 30px; /* Ukuran tombol */
+        height: 30px; /* Ukuran tombol */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        color: var(--light);
+        text-decoration: none;
+        transition: none !important; /* Nonaktifkan transisi */
+        transform: none !important; /* Nonaktifkan transform (misalnya untuk hover scale) */
+        flex-shrink: 0;
+    }
+
+    /* Gaya spesifik untuk tombol Edit (Kuning) */
+    .table-data .order .action-icon.edit {
+        background-color: var(--yellow); /* Menggunakan variabel CSS */
+    }
+    .table-data .order .action-icon.edit:hover {
+        background-color: var(--yellow); /* Pastikan tetap kuning saat hover */
+        transform: none;
+    }
+
+    /* Gaya spesifik untuk tombol Delete (Merah) */
+    .table-data .order .action-icon.delete {
+        background-color: var(--red); /* Menggunakan variabel CSS */
+    }
+    .table-data .order .action-icon.delete:hover {
+        background-color: var(--red); /* Pastikan tetap merah saat hover */
+        transform: none;
+    }
+
+    .table-data .order .action-icon i {
+        font-size: 16px; /* Ukuran ikon */
+        margin: 0;
+    }
+
+
+    /* Gaya untuk pesan jika tidak ada data */
+    .no-data {
+        text-align: center;
+        padding: 20px;
+        color: var(--dark-grey);
+        font-style: italic;
+        background: var(--light);
+        border-radius: 10px;
+        margin-top: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        padding-bottom: 20px;
+    }
+
+    /* Gaya untuk pesan status (sukses/error) yang muncul dari redirect */
+    .form-message {
+        padding: 10px 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    .form-message.success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .form-message.error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    /* --- Responsive Adjustments (Disalin dari AdminGaleri.css) --- */
+    @media screen and (max-width: 768px) {
+        .table-data .order .head { /* Sesuaikan selector */
+            flex-direction: column;
+            align-items: flex-start;
+            padding-left: 15px;
+            padding-right: 15px;
+            border-bottom: none;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            margin-bottom: 0;
+        }
+
+        .table-data .order .head .search-form .search-box { /* Sesuaikan selector */
+            width: 100%;
+            max-width: none;
+            order: 3;
+        }
+
+        .head-title .btn-download {
+            width: 100%;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        .table-data .order { /* Sesuaikan selector */
+            padding: 0;
+        }
+
+        /* Mengubah tabel menjadi layout seperti kartu pada layar kecil */
+        .table-data .order table { /* Sesuaikan selector */
+            padding: 0;
+            border-radius: 0;
+            box-shadow: none;
+            background: transparent;
+            table-layout: auto; /* Kembali ke auto agar lebar kolom menyesuaikan konten di mobile */
+        }
+
+        /* Menghapus lebar eksplisit untuk kolom di mobile */
+        /* Hati-hati: urutan child harus sesuai dengan artikel */
+        .table-data .order table thead th:nth-child(1), /* ID */
+        .table-data .order table tbody td:nth-child(1),
+        .table-data .order table thead th:nth-child(2), /* Judul */
+        .table-data .order table tbody td:nth-child(2),
+        .table-data .order table thead th:nth-child(3), /* Penulis */
+        .table-data .order table tbody td:nth-child(3),
+        .table-data .order table thead th:nth-child(4), /* Tanggal */
+        .table-data .order table tbody td:nth-child(4),
+        .table-data .order table thead th:nth-child(5), /* Konten */
+        .table-data .order table tbody td:nth-child(5),
+        .table-data .order table thead th:nth-child(6), /* Hak Cipta */
+        .table-data .order table tbody td:nth-child(6),
+        .table-data .order table thead th:nth-child(7), /* Aksi */
+        .table-data .order table tbody td:nth-child(7) {
+            width: auto;
+        }
+
+        .table-data .order table thead { /* Sesuaikan selector */
+            display: none;
+        }
+
+        .table-data .order table tbody, /* Sesuaikan selector */
+        .table-data .order table tr,
+        .table-data .order table td {
+            display: block;
+            width: 100%;
+        }
+
+        .table-data .order table td { /* Sesuaikan selector */
+            text-align: right;
+            padding-left: 50%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            min-height: unset;
+            height: auto;
+            white-space: normal;
+            text-overflow: clip;
+
+            background: var(--light);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            margin: 0 15px 10px 15px;
+            padding: 15px 20px;
+        }
+
+        .table-data .order table tbody td { /* Sesuaikan selector */
+            border-bottom: none;
+        }
+
+        .table-data .order table td::before { /* Sesuaikan selector */
+            content: attr(data-label);
+            position: absolute;
+            left: 0;
+            width: 50%;
+            padding-left: 20px;
+            font-weight: 600;
+            text-align: left;
+            color: var(--dark-grey);
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* Data label untuk kolom artikel */
+        .table-data .order table td:nth-of-type(1)::before { content: "ID Publikasi"; }
+        .table-data .order table td:nth-of-type(2)::before { content: "Judul"; }
+        .table-data .order table td:nth-of-type(3)::before { content: "Penulis"; }
+        .table-data .order table td:nth-of-type(4)::before { content: "Tanggal"; }
+        .table-data .order table td:nth-of-type(5)::before { content: "Konten"; }
+        .table-data .order table td:nth-of-type(6)::before { content: "Hak Cipta"; }
+        .table-data .order table td:nth-of-type(7)::before { content: "Aksi"; }
+
+        .table-data .order .action-buttons { /* Sesuaikan selector */
+            justify-content: flex-end;
+        }
+    }

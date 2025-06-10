@@ -1,0 +1,417 @@
+/* Pastikan file ini di-link di HTML */
+
+/* Container utama untuk semua kartu analitik */
+.analytics-grid {
+    display: flex; /* Menggunakan Flexbox */
+    flex-wrap: wrap; /* Agar kartu bisa turun ke baris baru */
+    gap: 20px; /* Jarak antar kartu */
+    margin-top: 20px; /* Jarak dari elemen di atasnya */
+}
+
+/* Setiap kartu analitik individual */
+.chart-card {
+    background: var(--light);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, .05);
+
+    /* PENTING: Untuk membuat 2 kartu per baris */
+    flex-grow: 1; /* Biarkan kartu tumbuh mengisi ruang */
+    flex-basis: calc(50% - 10px); /* Kalkulasi untuk 2 kolom (50% lebar dikurangi setengah dari gap) */
+    min-width: 300px; /* Pastikan kartu tidak terlalu kecil pada layar sedang */
+
+    min-height: 350px; /* Tinggi minimum agar grafik tidak terlalu pendek */
+    max-height: 450px; /* Opsional: tinggi maksimum, agar semua kartu tingginya mirip */
+
+    display: flex; /* Gunakan flexbox untuk konten di dalam kartu */
+    flex-direction: column; /* Konten disusun vertikal (judul, dropdown, canvas) */
+    justify-content: space-between; /* Menjaga konten terdistribusi */
+}
+
+/* Pastikan canvas tidak meregang tanpa batas */
+.chart-card canvas {
+    max-height: calc(100% - 50px); /* Berikan ruang untuk judul dan dropdown */
+    width: 100% !important; /* Pastikan lebar 100% */
+    height: auto !important; /* Biarkan tinggi menyesuaikan aspek rasio yang dikontrol JS */
+}
+
+/* Responsivitas untuk layar kecil */
+@media screen and (max-width: 992px) { /* Sesuaikan breakpoint jika perlu */
+    .chart-card {
+        flex-basis: calc(100% - 0px); /* Ambil seluruh lebar pada layar menengah-kecil */
+    }
+}
+
+@media screen and (max-width: 768px) { /* Untuk tampilan mobile */
+    .chart-card {
+        flex-basis: 100%; /* Ambil seluruh lebar */
+        min-height: 300px; /* Mungkin lebih kecil di mobile */
+    }
+    .analytics-grid {
+        flex-direction: column; /* Pastikan menumpuk di mobile */
+        gap: 15px; /* Sesuaikan gap */
+    }
+}
+
+/* Tambahan untuk .analytics-dropdown jika belum diatur */
+.analytics-dropdown {
+    padding: 8px 12px;
+    border: 1px solid var(--grey);
+    border-radius: 8px;
+    background: var(--light);
+    color: var(--dark);
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+/* Perbaiki juga tampilan kotak info atas */
+.box-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+    justify-content: space-around;
+}
+
+.box-info li {
+    background: var(--light);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    flex-basis: calc(33.33% - 14px); /* Untuk 3 kolom */
+    min-width: 250px;
+    color: var(--dark);
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, .05);
+}
+
+@media screen and (max-width: 768px) {
+    .box-info li {
+        flex-basis: calc(50% - 10px); /* 2 kolom di tablet */
+    }
+}
+@media screen and (max-width: 576px) {
+    .box-info li {
+        flex-basis: 100%; /* 1 kolom di mobile */
+    }
+}
+
+
+
+/* Container utama untuk semua kartu analitik */
+.analytics-grid {
+    display: flex; /* Menggunakan Flexbox */
+    flex-wrap: wrap; /* Agar kartu bisa turun ke baris baru */
+    gap: 20px; /* Jarak antar kartu (horizontal dan vertikal) */
+    margin-top: 20px; /* Jarak dari elemen di atasnya */
+    align-items: stretch; /* Penting: Pastikan semua items (cards) tingginya sama di setiap baris */
+}
+
+/* Setiap kartu analitik individual */
+.chart-card {
+    background: var(--light);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, .05);
+    
+    /* PENTING: Untuk membuat 2 kartu per baris */
+    flex-grow: 1; /* Biarkan kartu tumbuh mengisi ruang yang tersedia */
+    flex-shrink: 1; /* Biarkan kartu menyusut jika tidak cukup ruang */
+    flex-basis: calc(50% - 10px); /* Kalkulasi untuk 2 kolom (50% lebar dikurangi setengah dari gap) */
+    min-width: 300px; /* Pastikan kartu tidak terlalu kecil pada layar sedang */
+
+    /* Tinggi: Atur height agar konsisten antar kartu di setiap baris */
+    /* Bisa min-height, max-height, atau height tetap. min-height lebih fleksibel */
+    min-height: 350px; /* Tinggi minimum agar grafik tidak terlalu pendek */
+    /* max-height: 450px; */ /* Opsional: jika ingin membatasi tinggi maksimum */
+    
+    display: flex; /* Gunakan flexbox untuk konten di dalam kartu (judul, dropdown, canvas) */
+    flex-direction: column; /* Konten disusun vertikal */
+    justify-content: space-between; /* Menjaga konten terdistribusi (judul di atas, chart di bawah) */
+}
+
+/* Pastikan canvas tidak meregang tanpa batas */
+.chart-card canvas {
+    max-height: calc(100% - 50px); /* Berikan ruang untuk judul dan dropdown */
+    width: 100% !important; /* Pastikan lebar 100% */
+    height: auto !important; /* Biarkan tinggi menyesuaikan aspek rasio yang dikontrol JS */
+}
+
+/* Responsivitas untuk layar kecil */
+@media screen and (max-width: 992px) { /* Untuk layar tablet besar atau laptop kecil */
+    .chart-card {
+        flex-basis: calc(100% - 0px); /* Satu kolom di layar menengah */
+        min-width: unset; /* Izinkan lebar menyusut */
+    }
+}
+
+@media screen and (max-width: 768px) { /* Untuk tampilan mobile/tablet potrait */
+    .chart-card {
+        flex-basis: 100%; /* Ambil seluruh lebar */
+        min-height: 300px; /* Mungkin lebih kecil di mobile */
+    }
+    .analytics-grid {
+        flex-direction: column; /* Pastikan menumpuk di mobile */
+        gap: 15px; /* Sesuaikan gap */
+    }
+}
+
+/* Tambahan untuk .analytics-dropdown jika belum diatur */
+.analytics-dropdown {
+    padding: 8px 12px;
+    border: 1px solid var(--grey);
+    border-radius: 8px;
+    background: var(--light);
+    color: var(--dark);
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+/* Perbaiki juga tampilan kotak info atas */
+.box-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+    justify-content: space-around;
+}
+
+.box-info li {
+    background: var(--light);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    flex-basis: calc(50% - 10px); /* Ini membuat 2 kolom untuk box-info */
+    min-width: 250px;
+    color: var(--dark);
+    box-shadow: 4px 4px 16px rgba(0, 0, 0, .05);
+}
+
+@media screen and (max-width: 576px) { /* Mobile view for box-info */
+    .box-info li {
+        flex-basis: 100%; /* 1 kolom di mobile */
+    }
+}
+
+
+/* Contoh di file admin.css atau adminanalitik.css */
+.status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 12px;
+    color: white; /* Warna teks default */
+}
+
+.status.pending {
+    background-color: #ff9f40; /* Oranye */
+}
+
+.status.confirmed {
+    background-color: #36a2eb; /* Biru */
+}
+
+.status.completed {
+    background-color: #4bc0c0; /* Hijau */
+}
+
+.status.cancelled {
+    background-color: #ff6384; /* Merah */
+}
+
+.status.process {
+    background-color: #9966ff; /* Ungu */
+}
+
+.status.shipped {
+    background-color: #c9cbce; /* Abu-abu */
+}
+
+.status.default {
+    background-color: #555; /* Warna abu-abu gelap untuk status yang tidak didefinisikan */
+}
+
+
+/* Contoh untuk file CSS Anda, misalnya admin.css */
+
+/* Gaya dasar untuk setiap item status di daftar ini */
+.status-list .status-item {
+    padding: 8px 15px; /* Memberi sedikit ruang */
+    margin-bottom: 5px; /* Jarak antar item status */
+    border-radius: 8px; /* Sudut sedikit melengkung */
+    font-weight: 500; /* Ketebalan font */
+    color: white; /* Warna teks default */
+    background-color: #f0f0f0; /* Warna latar belakang default yang netral */
+    text-align: center; /* Teks di tengah */
+    width: 200px; /* Lebar yang konsisten, sesuaikan jika perlu */
+    box-sizing: border-box; /* Padding tidak menambah lebar total */
+}
+
+/* Warna spesifik untuk setiap status */
+.status-list .status-item.status-pending {
+    background-color: #ff9f40; /* Oranye untuk Menunggu Pembayaran */
+}
+
+.status-list .status-item.status-confirmed {
+    background-color: #36a2eb; /* Biru untuk Pembayaran Dikonfirmasi */
+}
+
+.status-list .status-item.status-completed {
+    background-color: #4bc0c0; /* Hijau untuk Sudah Sampai */
+}
+
+.status-list .status-item.status-cancelled {
+    background-color: #ff6384; /* Merah untuk Dibatalkan (jika ada) */
+}
+
+.status-list .status-item.status-process {
+    background-color: #9966ff; /* Ungu untuk Diproses (jika ada) */
+}
+
+.status-list .status-item.status-shipped {
+    background-color: #c9cbce; /* Abu-abu terang untuk Dikirim (jika ada) */
+}
+
+/* Warna default jika status tidak terdefinisi atau untuk status-default */
+.status-list .status-item.status-default {
+    background-color: #777; /* Abu-abu gelap */
+}
+
+/* Jika Anda ingin teksnya memiliki warna tersendiri (bukan latar belakang) */
+/* Anda bisa menghapus background-color dari .status-item.status-pending dst.
+   dan menggantinya dengan color: #ff9f40; */
+
+
+
+
+   /* Dalam file CSS Anda, misalnya admin.css */
+
+.box-info {
+    display: flex; /* Mengaktifkan Flexbox untuk elemen ul */
+    justify-content: space-between; /* Mendistribusikan ruang secara merata antar item */
+    gap: 20px; /* Memberikan jarak antar kartu, sesuaikan jika perlu */
+    margin-top: 20px; /* Jarak dari elemen di atasnya */
+    /* Hapus 'flex-wrap: wrap;' dari sini jika Anda benar-benar tidak ingin mereka membungkus SAMA SEKALI.
+       Namun, sangat disarankan untuk tetap menggunakan flex-wrap dengan media query untuk responsivitas. */
+    /* flex-wrap: nowrap; <-- Ini akan mencegah wrapping, tapi bisa menyebabkan overflow di layar kecil */
+}
+
+.box-info li {
+    /* Mengatur lebar dasar setiap kartu agar mereka menempati sekitar 1/3 dari lebar container */
+    flex: 0 0 calc(33.33% - 14px); /* flex-grow: 0, flex-shrink: 0, flex-basis: calc(33.33% - 14px) */
+                                /* 14px = sekitar (gap 20px * 2 sisi) / 3 item = 13.33px. Dibulatkan ke 14px untuk keamanan. */
+                                /* Atau bisa juga menggunakan: flex-basis: calc(100% / 3 - (2 * 20px / 3)); */
+
+    background-color: #fff; /* Warna latar belakang kartu */
+    padding: 20px;
+    border-radius: 8px;
+    display: flex; /* Aktifkan flexbox juga untuk konten di dalam setiap kartu */
+    align-items: center; /* Pusatkan ikon dan teks secara vertikal */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Tambahkan sedikit bayangan */
+    text-align: left; /* Atur rata kiri untuk teks dalam kartu (opsional) */
+}
+
+/* Jika Anda ingin sedikit ruang di bawah ikon dan teks */
+.box-info li i {
+    margin-right: 15px; /* Jarak antara ikon dan teks */
+    font-size: 40px; /* Ukuran ikon, sesuaikan jika perlu */
+    /* Sesuaikan warna ikon jika diinginkan, misal: */
+    /* color: #4bc0c0; */
+}
+
+.box-info li .text {
+    flex-grow: 1; /* Biarkan teks mengambil sisa ruang setelah ikon */
+}
+
+.box-info li .text h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.box-info li .text p {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Media Queries untuk Responsivitas (Sangat Disarankan!) */
+/* Meskipun Anda ingin 3 kolom, pada layar yang sangat kecil,
+   memaksa 3 kolom akan membuat konten tidak terbaca.
+   Disarankan untuk tetap membungkus pada breakpoint tertentu. */
+
+@media screen and (max-width: 800px) { /* Contoh breakpoint, sesuaikan */
+    .box-info {
+        flex-wrap: wrap; /* Izinkan wrapping di layar yang lebih kecil dari 800px */
+        justify-content: center; /* Pusatkan item jika hanya ada 1 atau 2 */
+    }
+    .box-info li {
+        flex: 0 0 calc(50% - 15px); /* Pada layar yang lebih kecil, buat 2 kolom per baris */
+        /* Jika Anda ingin 2 kartu di satu baris, gunakan 50% */
+        /* (100% / 2) - (gap 20px / 2) */
+    }
+}
+
+@media screen and (max-width: 500px) { /* Contoh breakpoint, sesuaikan */
+    .box-info li {
+        flex: 0 0 100%; /* Pada layar yang sangat kecil, buat 1 kolom per baris */
+        max-width: 400px; /* Batasi lebar maksimum agar tidak terlalu lebar di ponsel besar */
+    }
+}
+
+/* Dalam file CSS Anda, misalnya admin.css atau adminanalitik.css */
+
+/* Gaya dasar untuk semua span status di tabel */
+.table-data .order table tbody tr td .status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    color: white; /* Warna teks default untuk kontras dengan latar belakang gelap */
+    display: inline-block;
+    min-width: 90px;
+    /* Tambahan: pastikan transisi untuk efek hover jika diinginkan */
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* WARNA UNTUK SETIAP STATUS (MENYESUAIKAN DENGAN orderStatusColors di PHP) */
+.table-data .order table tbody tr td .status.pending {
+    background-color: #ff9f40; /* Warna Oranye dari rgba(255, 159, 64, 0.8) */
+}
+
+.table-data .order table tbody tr td .status.confirmed {
+    background-color: #36a2eb; /* Warna Biru dari rgba(54, 162, 235, 0.8) */
+}
+
+.table-data .order table tbody tr td .status.completed {
+    background-color: #4bc0c0; /* Warna Hijau dari rgba(75, 192, 192, 0.8) */
+}
+
+.table-data .order table tbody tr td .status.cancelled {
+    background-color: #ff6384; /* Warna Merah dari rgba(255, 99, 132, 0.8) */
+}
+
+.table-data .order table tbody tr td .status.process {
+    background-color: #9966ff; /* Warna Ungu dari rgba(153, 102, 255, 0.8) */
+}
+
+.table-data .order table tbody tr td .status.shipped {
+    background-color: #c9cbce; /* Warna Abu-abu dari rgba(201, 203, 207, 0.8) */
+}
+
+/* Warna default jika status tidak terdefinisi di PHP atau ada error */
+.table-data .order table tbody tr td .status.default {
+    background-color: #777; /* Abu-abu gelap */
+}
+
+/* Optional: Hover effect */
+.table-data .order table tbody tr td .status:hover {
+    opacity: 0.9;
+    /* transition sudah diatur di .status */
+}

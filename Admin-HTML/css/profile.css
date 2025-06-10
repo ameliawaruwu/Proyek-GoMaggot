@@ -1,0 +1,110 @@
+/* profile.css */
+
+/* profile.css */
+
+.profile-container {
+  max-width: 600px;
+  margin: 40px auto 60px; /* beri margin bawah agar footer tidak menempel */
+  padding: 30px 25px;
+  background-color: #f9fafb;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #222;
+}
+
+.profile-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: 700;
+  font-size: 28px;
+  color: #333;
+}
+
+.avatar-section {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.avatar-section .avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 3px solid #4CAF50;
+  object-fit: cover;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.avatar-section button {
+  padding: 10px 24px;
+  font-size: 15px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+.avatar-section button:hover {
+  background-color: #388e3c;
+}
+
+/* Form labels */
+form label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
+  margin-top: 18px;
+}
+
+/* Inputs dan textarea */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.8px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  font-family: inherit;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus,
+form textarea:focus {
+  border-color: #4CAF50;
+  outline: none;
+}
+
+form textarea {
+  resize: vertical;
+  min-height: 110px;
+  font-family: inherit;
+}
+
+/* Submit button */
+form button[type="submit"] {
+  margin-top: 30px;
+  width: 100%;
+  padding: 14px 0;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+  background-color: #357a38;
+}

@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* --- Gaya Tombol Aksi --- */
+.table-data .order table td .btn-action,
+.table-data .order table td button.btn-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    margin-right: 5px;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+
+    border: none !important;
+    padding: 0 !important;
+    background: none !important;
+    cursor: pointer !important;
+    outline: none !important;
+}
+
+.table-data .order table td .btn-edit,
+.table-data .order table td button.btn-edit {
+    background-color: #FFC107 !important; /* Kuning */
+    color: #333 !important;
+}
+
+.table-data .order table td .btn-delete,
+.table-data .order table td button.btn-delete {
+    background-color: #DC3545 !important; /* Merah */
+    color: #fff !important;
+}
+
+.table-data .order table td .btn-action:hover,
+.table-data .order table td button.btn-action:hover {
+    filter: brightness(90%) !important;
+}
+
+.table-data .order table td .btn-action i,
+.table-data .order table td button.btn-action i {
+    font-size: 1.2rem !important;
+    line-height: 1 !important;
+}
+
+
+/* --- Responsiveness Styles for Table --- */
+
+/* Pastikan .table-responsive bekerja */
+.table-responsive {
+    overflow-x: auto; /* Kunci untuk scrolling horizontal */
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    margin-top: 15px;
+}
+
+/* Tabel Utama */
+.table-data table {
+    width: 100%;
+    border-collapse: collapse;
+    /* Jangan pakai table-layout: fixed; dulu sampai semua kolom sejajar */
+    /* table-layout: fixed; */
+    min-width: 900px; /* Pastikan min-width cukup besar untuk semua kolom */
+    box-sizing: border-box; /* Konsistensi box model */
+}
+
+/* Header Tabel */
+.table-data table th {
+    font-weight: 600;
+    text-align: left; /* Rata kiri */
+    padding: 12px 15px !important; /* Padding konsisten */
+    vertical-align: middle !important; /* Sejajarkan konten di tengah vertikal */
+    border-bottom: 1px solid #eee; /* Garis bawah header */
+    background-color: #f9f9f9; /* Latar belakang header */
+    box-sizing: border-box !important; /* Konsistensi box model */
+    white-space: nowrap; /* Pastikan teks header tidak membungkus */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Sel Data Tabel */
+.table-data table td {
+    text-align: left; /* Rata kiri */
+    padding: 10px 15px !important; /* Padding konsisten */
+    vertical-align: middle !important; /* Sejajarkan konten di tengah vertikal */
+    border-bottom: 1px solid #eee; /* Garis bawah antar baris */
+    white-space: nowrap; /* Pastikan teks di sel tidak membungkus secara default */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box !important; /* Konsistensi box model */
+}
+
+/* Baris Tabel */
+.table-data table tr:last-child td {
+    border-bottom: none; /* Hapus border di baris terakhir */
+}
+
+
+/* --- Media Queries --- */
+
+/* Aturan untuk layar di bawah 768px (Tablet/Mobile) */
+@media (max-width: 768px) {
+    main {
+        padding: 10px;
+    }
+    .head-title {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .head-title .btn-download {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+    .breadcrumb {
+        margin-bottom: 10px;
+    }
+    .table-data .order {
+        padding: 15px;
+    }
+    .table-data .order .head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .table-data .order .head .bx-search,
+    .table-data .order .head .bx-filter {
+        display: none;
+    }
+
+    /* Tabel di Mobile */
+    .table-data table {
+        min-width: 650px; /* Min-width yang lebih kecil untuk mobile, sesuaikan */
+    }
+    .table-data table th,
+    .table-data table td {
+        font-size: 13px !important;
+        padding: 8px 10px !important; /* Padding lebih kecil di mobile */
+        white-space: nowrap; /* Pertahankan nowrap di mobile jika scroll horizontal diinginkan */
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Sembunyikan kolom tertentu di layar kecil */
+    .hide-on-mobile {
+        display: none !important;
+    }
+
+    /* Penyesuaian untuk gambar profil di dalam tabel */
+    .table-data table td img {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    /* Action buttons di mobile */
+    .table-data table td[data-label="Action"] {
+        white-space: normal !important; /* Izinkan tombol membungkus di sini */
+        text-align: center !important;
+        min-width: 80px !important; /* Pastikan ruang minimal untuk tombol */
+    }
+    .table-data table td[data-label="Action"] .btn-action {
+        margin-right: 2px !important;
+        padding: 6px !important;
+    }
+}
+
+/* Bagian yang HARUS DIHAPUS atau DIKOMENTARI PENUH jika tidak ingin "stacking table" */
+/* Ini adalah sumber utama kolom bertumpuk seperti di screenshot Anda */
+/* Periksa file CSS Anda dan HAPUS SELURUH BLOK INI jika ada */
+/*
+@media (max-width: 600px) {
+    .table-data table,
+    .table-data thead,
+    .table-data tbody,
+    .table-data th,
+    .table-data td,
+    .table-data tr {
+        display: block !important;
+    }
+    .table-data thead tr { position: absolute !important; top: -9999px !important; left: -9999px !important; }
+    .table-data tr {
+        border: 1px solid #ccc !important;
+        margin-bottom: 10px !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        padding: 10px !important;
+    }
+    .table-data td {
+        border: none !important;
+        position: relative !important;
+        padding-left: 50% !important;
+        text-align: left !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    .table-data td::before {
+        position: absolute !important;
+        top: 6px !important;
+        left: 6px !important;
+        width: 45% !important;
+        padding-right: 10px !important;
+        white-space: nowrap !important;
+        content: attr(data-label) !important;
+        font-weight: bold !important;
+    }
+    .table-data td:last-child {
+        text-align: center !important;
+        padding-left: 6px !important;
+        margin-top: 10px !important;
+        border-top: 1px solid #eee !important;
+    }
+}
+*/

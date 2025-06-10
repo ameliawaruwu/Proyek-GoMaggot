@@ -1,0 +1,116 @@
+/* AdminDeleteGaleri.css */
+
+/* Variabel (pastikan ini didefinisikan di tempat yang dapat diakses, misal di root CSS Anda) */
+:root {
+    --light: #f4f7f6; /* Pastikan variabel ini ada atau sesuaikan */
+    --dark: #343a40;
+    --grey: #e9ecef;
+    --dark-grey: #6c757d;
+    --red: #dc3545;
+}
+
+
+/* --- START MODIFIKASI INI --- */
+/* Kosongkan atau hapus properti untuk .confirmation-box */
+.confirmation-box {
+    /* Hapus atau komentari properti berikut agar tidak ada background, padding, border, shadow */
+    /* background: none; */ /* Atau biarkan default */
+    padding: 0; /* Ubah padding menjadi 0 */
+    border-radius: 0; /* Ubah border-radius menjadi 0 */
+    box-shadow: none; /* Hapus shadow */
+    max-width: none; /* Hapus max-width agar mengikuti lebar parent */
+    margin: 0; /* Hapus margin auto, agar tidak terpusat */
+    text-align: left; /* Tetapkan rata kiri untuk konten di dalamnya */
+}
+
+.confirmation-box h3 {
+    color: var(--dark);
+    margin-bottom: 20px;
+    font-size: 24px;
+    /* text-align: left; -- ini sudah diwarisi dari .confirmation-box yang sekarang rata kiri */
+}
+/* --- AKHIR MODIFIKASI INI --- */
+
+
+/* Styling untuk pesan (biarkan seperti ini, akan mengikuti alignment parent) */
+.form-message {
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.form-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+.form-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+
+/* Styling untuk detail yang disederhanakan (pertahankan, ini bagus) */
+.confirmation-details {
+    margin-bottom: 25px;
+    display: flex; /* Gunakan flexbox untuk menata gambar dan teks */
+    align-items: flex-start; /* Sejajarkan item ke atas */
+    gap: 20px; /* Jarak antara gambar dan teks */
+}
+.confirmation-details img {
+    max-width: 200px;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--grey);
+    flex-shrink: 0; /* Pastikan gambar tidak mengecil */
+}
+.confirmation-details div { /* Div wrapper untuk teks agar mudah diatur */
+    flex-grow: 1; /* Biarkan teks mengisi sisa ruang */
+}
+.confirmation-details p {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: var(--dark-grey);
+}
+.confirmation-details p strong {
+    color: var(--dark);
+}
+
+/* Styling untuk tombol aksi (pertahankan, ini bagus) */
+.confirmation-actions {
+    display: flex;
+    justify-content: flex-start; /* Tombol rata kiri */
+    gap: 15px;
+    margin-top: 20px;
+}
+.btn-confirm-delete {
+    background-color: var(--red);
+    color: white;
+    padding: 10px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+.btn-confirm-delete:hover {
+    background-color: #cc0000;
+}
+.btn-cancel {
+    background-color: var(--grey);
+    color: var(--dark);
+    padding: 10px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+.btn-cancel:hover {
+    background-color: #d0d0d0;
+}

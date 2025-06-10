@@ -1,0 +1,906 @@
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+@media (max-width: 768px) {
+	.container{
+        width:10%;
+        margin:auto;
+	}
+    .listProduct{
+        width:50%
+    }
+}
+
+body{
+    background-color:none;
+    margin: 0;
+}
+
+.container .logo a{
+    font-size: 30px;
+    font-weight: 500;
+    color: #ffffff;
+    font-family: "Kaushan Script", serif;
+    text-decoration: none;
+}
+.container .logo span{
+    color: rgb(121,185,0);
+    font-family: "Kaushan Script", serif;
+    text-decoration: none;
+}
+.container{
+    width: 1200px;
+    margin: auto;
+    max-width: 180vw;
+    text-align: center;
+    padding-top: 20px;
+    transition: transform .5s;
+    text-decoration: none;
+    y-content : space-between;
+}
+svg{
+    width: 30px;
+    color: white;
+}
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    background-color:none;
+}
+.icon-cart {
+    display: flex; /* Gunakan flexbox untuk tata letak */
+    align-items: center; /* Pusatkan item secara vertikal */
+    position: relative; /* Tetap gunakan relative jika ada elemen lain yang memerlukan posisi */
+    right: -65%;
+}
+
+.search-container {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    align-items: center;
+    top: 15%;
+    left: 70%;
+}
+.seacrh-cart{
+    position: relative;
+}
+
+.icon-cart span{
+    position: absolute;
+    background-color: red;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+    color: #fff;
+    top: 50%;
+    right: 20px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Poppins', sans-serif; /* Tambahkan sans-serif sebagai fallback */
+    scroll-behavior: smooth;
+}
+
+.section {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px 12%;
+}
+
+.navbar {
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 12%;
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 999; /* Pastikan z-index cukup tinggi */
+    background-color: rgb(0, 0, 0); /* Tambahkan warna latar belakang */
+    transition: background-color 0.6s; /* Transisi untuk perubahan warna */
+}
+
+.navbarSticky {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.logo a {
+    font-size: 30px;
+    font-weight: 500;
+    color: #ffffff;
+    font-family: "Kaushan Script", serif;
+
+}
+
+.logo a span {
+    color: rgb(121, 185, 0);
+    font-family: "Kaushan Script", serif;
+    padding-left: 110%;
+}
+
+.navbar ul {
+    display: flex; /* Ubah menjadi flex untuk tata letak yang lebih baik */
+    align-items: center; /* Pusatkan item secara vertikal */
+    margin-left: 13%;
+
+}
+
+.navbar ul li {
+   
+}
+
+.navbar ul li a {
+    color: #ffffff;
+    font-size: 17px;
+    transition: color 0.3s; /* Tambahkan transisi untuk efek hover */
+    margin-left: 10px;
+}
+
+.navbar ul li a:hover {
+    color: rgb(121, 185, 0);
+    cursor: pointer;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-right: 10%;
+}
+
+.nav-btn a i{
+  background-color:rgb(121,185,0);
+  height: 40px;
+  width: 40px;
+  border-radius: 9px;
+  font-size: 1.4rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.nav-btn i{
+  margin-right: 30px;
+  color: rgb(255, 255, 255);
+  background-color:rgb(121,185,0);
+  height: 40px;
+  width: 40px;
+  border-radius: 9px;
+  font-size: 1.4rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+}
+
+.navbar .ri-menu-line {
+    height: 50px;
+    width: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 128, 0);
+    border-radius: 8px;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.6s;
+    display: none; /* Tampilkan hanya pada ukuran layar kecil */
+}
+
+.navbar .ri-menu-line:hover {
+    background-color: rgb(121, 185, 0);
+}
+
+button {
+    width: 150px;
+    padding: 10px;
+    border: none;
+    box-shadow: inset 5px 5px 10px rgba(71, 106, 71, 0.5);
+    background-color: rgb(121, 185, 0);
+    border-radius: 30px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.6s, box-shadow 0.6s; /* Tambahkan transisi untuk efek hover */
+}
+
+button:hover {
+    box-shadow: inset 5px 5px 10px rgba(121, 185, 0, 0.5);
+    background-color: rgb(0, 128, 0);
+}
+
+/* Media Query untuk Responsivitas */
+@media (max-width: 768px) {
+    .navbar ul {
+        display: none; /* Sembunyikan menu pada layar kecil */
+    }
+}
+    .navbar .ri-menu-line {
+        display: flex; 
+    }
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: sans-serif;
+    background: rgba(205, 195, 162, 0.605);
+  }
+  
+  .container {
+    max-width: 75%;
+    margin: auto;
+    height: 80vh;
+    margin-top: 3%;
+    background: white;
+    box-shadow: 5px 5px 10px 3px rgba(0, 0, 0, 0.3);
+    text-align: left;
+  }
+  
+  .left, .right {
+    width: 50%;
+    padding: 30px;
+  }
+  
+  .flex {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .flex1 {
+    display: flex;
+  }
+  
+  .main_image {
+    width: auto;
+    height: auto;
+  }
+  
+  .option img {
+    width: 75px;
+    height: 75px;
+    padding: 10px;
+  }
+  
+  .right {
+    padding: 25px 100px 50px 50px;
+  }
+  
+  h3 {
+    color:rgb(52, 74, 47);
+    margin: 20px 0 20px 0;
+    font-size: 25px;
+  }
+ 
+  h5,
+  p,
+  h1,
+  small {
+    color:rgb(21, 10, 8);
+    margin-top: 13%;
+    
+    
+  }
+  p {
+    margin: 20px 0 50px 0;
+    line-height: 25px;
+  }
+  
+  h5 {
+    font-size: 15px;
+  }
+  
+  label,
+  .add span,
+  .color span {
+    width: 25px;
+    height: 25px;
+    background: #000;
+    border-radius: 50%;
+    margin: 20px 10px 20px 0;
+  }
+  
+  .color span:nth-child(2) {
+    background: #EDEDED;
+  }
+  
+  .color span:nth-child(3) {
+    background: #D5D6D8;
+  }
+  
+  .color span:nth-child(4) {
+    background: #EFE0DE;
+  }
+  
+  .color span:nth-child(5) {
+    background: #AB8ED1;
+  }
+  
+  .color span:nth-child(6) {
+    background: #F04D44;
+  }
+  
+  .add label,
+  .add span {
+    background: none;
+    border: 1px solid #C1908B;
+    color: #C1908B;
+    text-align: center;
+    line-height: 25px;
+  }
+  
+  .add label {
+    padding: 10px 30px 0 20px;
+    border-radius: 50px;
+    line-height: 0;
+  }
+  
+.tombol button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: rgb(121, 185, 0);
+    color: white;
+    border-radius: 30px;
+    
+  }
+
+  
+  @media only screen and (max-width:768px) {
+    .container {
+      max-width: 90%;
+      margin: auto;
+      height: auto;
+    }
+  
+    .left, .right {
+      width: 100%;
+    }
+  
+    .container {
+      flex-direction: column;
+    }
+  }
+  
+  @media only screen and (max-width:511px) {
+    .container {
+      max-width: 100%;
+      height: auto;
+      padding: 10px;
+    }
+  
+    .left, .right {
+      padding: 0;
+    }
+  
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  
+    .option {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  body {
+    font-family: sans-serif;
+}
+
+.info span {
+  color: #666;
+  font-size: 14px;
+  right: 50px;
+}
+
+.info span:last-child {
+  margin-right: 0;
+}
+.button {
+  display: block; /* Make the button a block element */
+  margin-left: 330px; 
+  text-decoration: none;
+  color: #666;
+  font-size: 12px;
+  margin-bottom: 30px;
+  margin-top: -25px;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.product-rating .stars {
+  display: flex;
+  gap: 5px;
+}
+
+.product-rating .stars i {
+  color: gold;
+  font-size: 18px;
+}
+
+.bagianprofil {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-top: 50px;
+  background-color:white;
+  border-radius: 30px;
+
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+}
+
+.profile-image {
+  width: 100px;
+  margin-right: 20px;
+}
+.profile-image img{
+  border-radius: 50%
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-info h2 {
+  margin-bottom: 5px;
+}
+
+.profile-info p {
+  margin-bottom: 0;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  gap: 50px;
+  margin-right: 100px;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #666;
+}
+
+
+.bagiandesk {
+border-radius: 40px;
+  margin: 10;
+  padding: 20px;
+  margin-top: 20px;
+  background-color: white;
+}
+
+h2 {
+  text-align: left;
+  color: black;
+}
+
+.spec-item {
+  margin-bottom: 10px;
+}
+
+.spec-label {
+  display: inline-block;
+  width: 150px;
+  font-weight: bold;
+}
+
+.spec-value {
+  display: inline-block;
+}
+
+a {
+  color: blue;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+
+
+.bagianakhir {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 40px;
+}
+h1{
+  color: black;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.rating .stars {
+  display: flex;
+}
+
+.rating .stars i {
+  font-size: 20px;
+  color: #f0ad4e;
+  margin-right: 5px;
+}
+
+.rating .score {
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.buttons button {
+  background-color: #f0ad4e;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.review {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 20px;
+}
+
+.review .user {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.review .user .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.review .user .name {
+  font-weight: bold;
+}
+
+.review .text {
+  font-size: 16px;
+  color: #333;
+}
+
+
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* FOOTER */
+.footer{
+  flex-direction: column;
+  gap: 5px;
+  background-image: url('../images/footer-bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  padding-bottom: 0;
+}
+
+.logo2 a {
+  font-size: 30px;
+  font-weight: 500;
+  color: #ffffff;
+  font-family: "Kaushan Script", serif;
+
+}
+
+.logo2 a span {
+  color: rgb(121, 185, 0);
+  font-family: "Kaushan Script", serif;
+}
+
+.footer_top{
+  width: 70%;
+  height: 45px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  background-image: url(brand-bg.jpg);
+  padding: 2% 3%;
+  border-radius: 40px;
+}
+.footer_top h1{
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 12%;
+  color: white;
+}
+.footer_follow{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.footer_follow h2 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: white;
+}
+.footer_social{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.footer_social i{
+  width: 40px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  color: #000;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  transition: .3s;
+}
+.footer_social i:hover{
+  color: #fff;
+  background-color: #000;
+  cursor: pointer;
+}
+.footer_grid{
+  margin-top: 10px;
+  width: 100%;
+ display: grid;
+ grid-template-columns: repeat(4,1fr);
+ place-content: start;
+ place-items: start;
+ gap: 10px;
+ color: #fff; 
+}
+.footer_col{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  color: white;
+}
+.footer_col h3{
+  font-size: 1rem;
+  font-weight: 300;
+  margin: 10px 0;
+  color: white;
+}
+.footer_col a{
+  color: #fff;
+}
+.footer_col a span{
+  color: rgb(0,128,0);
+  padding-left:15%;
+}
+.footer_col p{
+  font-size: 1rem;
+  margin: 10px 0;
+  font-weight: 300;
+  color: white;
+}
+.footer_col h2{
+  font-size: 2rem;
+  font-weight: 300;
+  margin-bottom:15px;
+  color: white;
+}
+.footer_col a{
+  margin: 5px 0;
+  transition: .3s;
+}
+.footer_col a i{
+  color: rgb(0,128,0);
+  font-size: 1.2rem;
+}
+.footer_col a:hover{
+  color: rgb(0,128,0);
+}
+.footer_col input{
+  width: 100%;
+  height: 50px;
+  border: none;
+  outline: none;
+  margin: 10px 0;
+  background-color: transparent;
+  border: 1px solid rgb(0,128,0);
+  color: #fff;
+  font-size: 1.2rem;
+  border-radius: 15px;
+  padding-left: 5%;
+  transition: .3s;
+  & ::placeholder{
+      color: #fff;
+  }
+}
+.footer_col input:active,
+.footer_col input:focus{
+  outline: rgb(121,185,0);
+}
+.footer_col button{
+  width: 60%;
+  height: 50px;
+  border-radius: 15px;
+  font-size: 1.2rem;
+}
+.footer_bottom{
+  width: 60%;
+  border-top: 1px solid #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1%;
+  
+}
+.footer_bottom p{
+  color: #fff;
+  font-size: 1rem;    
+ margin-bottom: 1%;
+}
+.footer_bottom p a{
+  color: rgb(121,185,0);
+}
+.footer_buttom p a:hover{
+  color: rgb(0,128,0);
+}
+
+
+/* CSS untuk menyesuaikan dengan smartphone */
+
+/* Gaya dasar */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.menu {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.menu li a {
+  text-decoration: none;
+  padding: 10px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+/* Media Query untuk layar smartphone */
+@media only screen and (max-width: 768px) {
+  .navbar {
+      flex-direction: column;
+      text-align: center;
+  }
+
+  .menu {
+      flex-direction: column;
+      padding: 0;
+  }
+
+  .menu li {
+      margin-bottom: 10px;
+  }
+
+  .container {
+      flex-direction: column;
+      padding: 10px;
+  }
+
+  .left, .right {
+      width: 100%;
+  }
+
+  .right h1 {
+      font-size: 1.5rem;
+  }
+
+  .button button {
+      width: 100%;
+      padding: 10px;
+  }
+
+  .profile-info {
+      text-align: center;
+  }
+
+  .stat {
+      text-align: center;
+      margin-bottom: 10px;
+  }
+} 
+
+@media only screen and (max-width: 480px) {
+  .navbar {
+      padding: 5px;
+  }
+
+  .menu li a {
+      padding: 5px;
+  }
+
+  .container {
+      padding: 5px;
+  }
+
+  .right h1 {
+      font-size: 1.2rem;
+  }
+
+  .button button {
+      font-size: 1rem;
+  }
+
+  .stat-value {
+      font-size: 1.2rem;
+  }
+} 

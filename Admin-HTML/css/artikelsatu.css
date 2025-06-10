@@ -1,0 +1,37 @@
+/* Tambahkan atau Modifikasi bagian ini di artikeldua.css Anda */
+
+/* --- PERBAIKAN UNTUK GAMBAR UTAMA ARTIKEL --- */
+.gambar-utama-artikel img {
+    height: 250px;       /* Mengatur tinggi gambar menjadi 250px */
+    width: auto;         /* Biarkan lebar menyesuaikan aspek rasio */
+    border-radius: 15px; /* Memberikan border radius */
+    float: left;         /* Membuat gambar mengapung ke kiri agar teks ada di sampingnya */
+    margin-right: 15px;  /* Memberikan jarak antara gambar dan teks */
+    margin-bottom: 10px; /* Memberikan sedikit jarak di bawah gambar */
+    object-fit: cover;   /* Memastikan gambar mengisi area tanpa distorsi, mungkin ada cropping */
+}
+
+/* --- Untuk gambar kedua (gambarArtikelKanan) agar tetap float ke kanan --- */
+#gambarArtikelKanan {
+    float: right; /* Membuat gambar mengapung ke kanan */
+    margin-left: 20px; /* Memberi jarak antara gambar dan teks di sebelah kirinya */
+    margin-bottom: 15px; /* Memberi jarak di bawah gambar jika ada elemen lain di bawahnya */
+    max-width: 40%; /* Mengatur lebar maksimum gambar agar tidak terlalu besar */
+    height: auto; /* Memastikan rasio aspek gambar tetap terjaga */
+    border-radius: 5px; /* Opsi: sedikit sudut melengkung */
+}
+
+
+/* Pastikan ada atau tambahkan clearfix jika belum ada */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Pastikan juga div .deskripsi memiliki overflow: hidden atau sejenisnya untuk menampung float */
+.deskripsi {
+    /* ... properti lain yang sudah ada ... */
+    overflow: hidden; /* SANGAT PENTING untuk mengatasi float gambar agar konten di bawahnya tidak naik */
+    /* ... properti lain yang sudah ada ... */
+}

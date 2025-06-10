@@ -1,0 +1,150 @@
+/* Reset dasar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Background body */
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f0f0f0, #ffffff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Container utama */
+  .form-container {
+    background: rgba(255, 255, 255, 0.8); /* transparan */
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+    width: 425px;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  /* Wrapper form */
+  .forms-wrapper {
+    display: flex;
+    width: 700px; /* 2x lebar form */
+    transition: transform 0.5s ease;
+  }
+  
+  /* Setiap form */
+  .form-box {
+    width: 350px;
+  }
+  
+  /* Sembunyikan form signup awalnya */
+  .hidden {
+    display: none;
+  }
+  
+  /* Judul Form */
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Tombol toggle login/signup */
+  .toggle-buttons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .toggle-buttons button {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: color 0.3s;
+  }
+  
+  .toggle-buttons button.active {
+    color: #3498db;
+    border-bottom: 2px solid #3498db;
+  }
+  
+  /* Inputan Form */
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  form input {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fff;
+    position: relative;
+  }
+  
+  /* Tombol submit */
+  .submit-btn {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
+  }
+  
+  .submit-btn:hover {
+    background-color: #2980b9;
+  }
+  
+  /* Forgot password link */
+  .forgot-password {
+    margin-top: 5px;
+    font-size: 12px;
+    text-align: right;
+    text-decoration: none;
+    color: #666;
+  }
+  
+  .signup-link {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 15px;
+  }
+  
+  .signup-link a {
+    text-decoration: none;
+    color: #3498db;
+  }
+  
+  /* Mata Password */
+  .password-wrapper {
+    position: relative;
+  }
+  
+  .password-wrapper input {
+    width: 100%;
+    padding-right: 40px;
+  }
+  
+  .password-wrapper .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Icon mata */
+  .toggle-password img {
+    width: 20px;
+    height: 20px;
+  }
+  

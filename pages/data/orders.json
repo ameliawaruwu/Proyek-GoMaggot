@@ -1,0 +1,14 @@
+{
+    "ORD1001": {
+        "status": "Dikemas",
+        "estimated_delivery": "2025-05-29"
+    },
+    "ORD1002": {
+        "status": "Dikirim",
+        "estimated_delivery": "2025-05-27"
+    },
+    "ORD1003": {
+        "status": "Sampai",
+        "estimated_delivery": "2025-05-25"
+    }
+}

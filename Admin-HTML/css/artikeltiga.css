@@ -1,0 +1,207 @@
+/* artikeldua.css */
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Poppins:wght@100;400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: white;
+  background-image: url('https://i.pinimg.com/736x/0c/61/1a/0c611ab0e09772ae18b78f26e77a708b.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.artikel-atas {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 80px 12%;
+  flex-direction: column;
+}
+
+.artikel-isi {
+  background-color: rgb(136, 128, 110);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 30px;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.artikel-isi h1, .artikel-isi h2 {
+  color: white;
+}
+
+.artikel-penulis a {
+  color: rgb(181, 235, 99);
+}
+
+.artikel-deskripsi {
+  background-color: white;
+  border-radius: 15px;
+  padding: 20px;
+  color: #333;
+  line-height: 1.8;
+  text-align: justify;
+}
+
+.artikel-box {
+  overflow: hidden;
+}
+
+.artikel-gambar-pembuka {
+  float: left;
+  margin: 0 15px 10px 0;
+  max-width: 30%;
+  height: auto;
+  border-radius: 15px;
+  border: 1px solid #ddd;
+  display: block;
+}
+
+.artikel-teks-samping {
+  overflow: hidden;
+}
+
+.artikel-clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.artikel-gambar-rangkaian {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.artikel-gambar-rangkaian img {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.artikel-kaki {
+  background-color: rgb(136, 128, 110);
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  margin: 20px auto;
+}
+
+@media (max-width: 768px) {
+  .artikel-gambar-pembuka {
+    float: none;
+    max-width: 100%;
+    margin: 0 auto 15px auto;
+    display: block;
+  }
+
+  .artikel-gambar-rangkaian {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .artikel-isi, .artikel-deskripsi {
+    font-size: 0.95em;
+  }
+}
+.artikel-atas {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+
+
+.deskripsi {
+    display: flex;
+    flex-direction: row-reverse; /* supaya gambar di kanan */
+    align-items: flex-start;
+    background-color: white;
+    border-radius: 15px;
+    text-align: justify;
+    padding: 20px;
+    margin-top: 20px;
+    gap: 20px;
+    overflow: hidden;
+    color: #333;
+    flex-wrap: wrap; /* biar responsif di layar kecil */
+}
+
+#image2 {
+    flex: 1 1 35%; /* gambar ambil 35% ruang, bisa menyusut di layar kecil */
+    max-width: 300px;
+}
+
+#image2 img {
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+}
+
+.text-content {
+    flex: 1 1 60%;
+}
+
+
+
+
+
+/* Mengoreksi gaya .artikel-gambar-rangkaian menggunakan CSS Grid */
+/* Ini akan membuat gambar-gambar tersebut tampil horizontal, terpusat di tengah, dan persis 3 kolom */
+.artikel-gambar-rangkaian {
+    display: grid; /* Mengubah kontainer menjadi Grid container */
+    grid-template-columns: repeat(3, 1fr); /* PENTING: Membuat 3 kolom dengan lebar yang sama */
+                                          /* 1fr berarti setiap kolom mengambil porsi ruang yang sama */
+    gap: 10px; /* Jarak antar gambar */
+    margin: 20px auto; /* Memberi jarak atas/bawah dan menengahkan kontainer itu sendiri */
+    max-width: 90%; /* Batasi lebar maksimum kontainer gambar ini (sesuaikan jika perlu) */
+    clear: both; /* Memastikan div ini berada di bawah elemen yang mengambang */
+    /* flex-wrap tidak diperlukan lagi dengan grid-template-columns */
+}
+
+.artikel-gambar-rangkaian img {
+    max-width: 100%; /* Pastikan gambar tidak melebihi lebar sel gridnya */
+    height: auto; /* Pertahankan rasio aspek */
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-sizing: border-box; /* Pastikan padding/border termasuk dalam lebar */
+    display: block; /* Penting untuk menghilangkan spasi di bawah gambar */
+    margin: 0 auto; /* Menengahkan gambar di dalam sel gridnya */
+}
+
+/* Bagian Media Query (Responsif) - PERBAIKI BAGIAN INI JUGA */
+@media (max-width: 768px) {
+    /* ... kode CSS lainnya ... */
+
+    .artikel-gambar-rangkaian {
+        grid-template-columns: 1fr; /* Di layar kecil, ubah menjadi 1 kolom penuh */
+        justify-items: center; /* Untuk menengahkan gambar di setiap kolom */
+        margin: 0 auto; /* Tengahkan kontainer di layar kecil */
+        max-width: 100%; /* Ambil seluruh lebar */
+    }
+
+    .artikel-gambar-rangkaian img {
+        margin: 0 auto; /* Tengahkan gambar secara individual di layar kecil */
+        /* max-width: 100%; akan diatur oleh grid-template-columns: 1fr; */
+    }
+
+    /* ... kode CSS lainnya ... */
+}
