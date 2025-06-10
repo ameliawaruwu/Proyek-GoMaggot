@@ -120,8 +120,7 @@
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"></script>
 <script src="s../Admin-HTML/js/script2.js"></script>
-=======
+
 <script src="script.js"></script>
->>>>>>> ce5ec8126cfcf8cc0467651fa803dc3855ca4986
 
 <?php include '../partials/footer.php'; ?>
