@@ -1,10 +1,6 @@
 <?php
 include '../views/headeradmin.php';
 ?>
-
-
-
-
  <!-- MAIN -->
  <link rel="stylesheet" href="../Admin-HTML/css/admin.css">
  <main>

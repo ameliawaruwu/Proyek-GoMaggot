@@ -1,7 +1,6 @@
 <?php
-// === HEADER AND CSS INCLUDES ===
 include '../views/header.php';
-include '../configdb.php'; // Database connection
+include '../configdb.php';
 ?>
 
 <link rel="stylesheet" href="../Admin-HTML/css/artikeldua.css">
@@ -9,14 +8,8 @@ include '../configdb.php'; // Database connection
 
 <div class="main-article-wrapper">
 <?php
-
-// --- ARTICLE ID SET TO 1 ---
-// We're explicitly setting the article ID to 1.
-// This means the page will always display the article with id_artikel = 1,
-// regardless of what's in the URL (e.g., ?id=2 will be ignored).
 $article_id = 3;
 
-// Fetch article data from the 'artikel' table
 $article = null;
 $stmt_article = $conn->prepare("SELECT id_artikel, judul, penulis, tanggal, hak_cipta, konten FROM artikel WHERE id_artikel = ?");
 $stmt_article->bind_param("i", $article_id);
@@ -26,7 +19,6 @@ $result_article = $stmt_article->get_result();
 if ($result_article->num_rows > 0) {
     $article = $result_article->fetch_assoc();
 } else {
-    // Display an error if article ID 1 is not found in the database
     echo "<div style='text-align: center; padding: 50px;'><h1>Artikel dengan ID " . htmlspecialchars($article_id) . " tidak ditemukan.</h1><p>Pastikan ada artikel dengan ID 1 di database Anda.</p></div>";
     $stmt_article->close();
     $conn->close();
@@ -54,14 +46,11 @@ $stmt_article->close();
             </div>
         <?php endif; ?>
 
-    </div> <?php // Closes artikel-atas ?>
+    </div>
 
-</div> <?php // Closes main-article-wrapper ?>
+</div>
 
 <?php
-// === CLOSE DATABASE CONNECTION ===
 $conn->close();
-
-// === FOOTER INCLUDE ===
 include '../partials/footer.php';
 ?>

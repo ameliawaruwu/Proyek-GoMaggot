@@ -1,6 +1,6 @@
 <?php
-// addgaleri.php
-include '../configdb.php'; // Menggunakan koneksi MySQLi Anda
+ include '../logic/update/auth.php'; 
+include '../configdb.php'; /
 
 $message = '';
 $message_type = '';

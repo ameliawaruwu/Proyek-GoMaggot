@@ -1,16 +1,9 @@
 <?php
-
-<<<<<<< HEAD
-include '../Logic/update/auth.php'; 
-include '../views/headeradmin.php'; 
-include '../configdb.php';
-?>
-<link rel="stylesheet" href="../Admin-HTML/css/admin.css">
-<link rel="stylesheet" href="../Admin-HTML/css/adminriviews.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
-=======
+// Pastikan hanya admin yang bisa mengakses halaman ini
 include '../Logic/update/auth.php';
+// Panggil bagian kepala admin (header, navigasi samping, dll.)
 include '../views/headeradmin.php';
+// Sambungkan ke database kita dong
 include '../configdb.php'; // Pastikan ini menyediakan $conn yang aktif dan berfungsi
 
 // Inisialisasi variabel untuk pesan feedback
@@ -67,7 +60,6 @@ if (!empty($whereClauses)) {
 }
 
 // Query untuk menghitung total ulasan (untuk pagination)
-// Menggunakan 'review' dan join yang benar
 $countSql = "SELECT COUNT(r.id_review) AS total
              FROM review r
              LEFT JOIN produk p ON r.idproduk = p.idproduk
@@ -77,11 +69,11 @@ $countSql = "SELECT COUNT(r.id_review) AS total
 $stmtCount = $conn->prepare($countSql);
 if ($stmtCount) {
     if (!empty($types)) {
-        // Buat salinan params dan types untuk stmtCount
         $temp_params = $params;
         $temp_types = $types;
+
         // Hapus 'ii' terakhir dari $temp_types karena itu untuk LIMIT dan OFFSET
-        // yang tidak diperlukan untuk query COUNT
+        // yang tidak diperlukan untuk query COUNT (jika sebelumnya sudah ada)
         if (strlen($temp_types) > 2 && substr($temp_types, -2) == 'ii') {
             $temp_types = substr($temp_types, 0, -2);
             array_pop($temp_params); // Hapus offset
@@ -110,7 +102,6 @@ if ($offset < 0) {
 }
 
 // Query untuk mengambil ulasan yang sebenarnya
-// Menggunakan 'review' dan join yang benar, serta nama kolom yang benar
 $sql = "SELECT
             r.id_review,
             r.id_pelanggan,
@@ -252,11 +243,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             $updateSql = "UPDATE review SET
-                                idproduk = ?,
-                                rating_produk = ?,
-                                komentar = ?,
-                                status = ?
-                              WHERE id_review = ?";
+                                 idproduk = ?,
+                                 rating_produk = ?,
+                                 komentar = ?,
+                                 status = ?
+                               WHERE id_review = ?";
             $stmtEdit = $conn->prepare($updateSql);
             if ($stmtEdit) {
                 $stmtEdit->bind_param("iissi",
@@ -279,7 +270,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Dapatkan produk untuk dropdown modal edit (ini diambil sekali)
-// Menggunakan alias 'id' agar sesuai dengan JS
 $productsForEdit = [];
 $sqlProducts = "SELECT idproduk AS id, namaproduk AS name FROM produk ORDER BY namaproduk ASC";
 $resultProducts = $conn->query($sqlProducts);
@@ -303,51 +293,10 @@ $error_message = $_GET['error_message'] ?? $error_message;
 <link rel="stylesheet" href="../Admin-HTML/css/admin.css">
 <link rel="stylesheet" href="../Admin-HTML/css/adminriviews.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
->>>>>>> ce5ec8126cfcf8cc0467651fa803dc3855ca4986
 
 <main>
     <div class="head-title">
         <div class="left">
-<<<<<<< HEAD
-            <h1>Product Reviews & Comments</h1>
-            <ul class="breadcrumb">
-                <li><a href="#">Dashboard</a></li>
-                <li><i class='bx bx-chevron-right'></i></li>
-                <li><a href="#" class="active">Reviews</a></li>
-            </ul>
-        </div>
-        <a href="addreviews.php" class="btn-download"> <i class='bx bx-plus-circle'></i>
-            <span class="text">Add New Review</span>
-        </a>
-    </div>
-
-    <div class="filter-section">
-        <div class="filter-group">
-            <label for="reviewStatusFilter">Status:</label>
-            <select id="reviewStatusFilter" class="analytics-dropdown">
-                <option value="all">All</option>
-                <option value="pending">Pending</option>
-                <option value="approved">Approved</option>
-                <option value="rejected">Rejected</option>
-            </select>
-        </div>
-        <div class="filter-group">
-            <label for="reviewRatingFilter">Rating:</label>
-            <select id="reviewRatingFilter" class="analytics-dropdown">
-                <option value="all">All Ratings</option>
-                <option value="5">5 Stars</option>
-                <option value="4">4 Stars</option>
-                <option value="3">3 Stars</option>
-                <option value="2">2 Stars</option>
-                <option value="1">1 Star</option>
-            </select>
-        </div>
-        <div class="filter-group search-box">
-            <input type="text" id="reviewSearchInput" placeholder="Search by product or comment..." class="form-input search-input">
-            <button id="reviewSearchButton" class="btn-primary"><i class='bx bx-search'></i></button>
-        </div>
-        <button id="clearFiltersBtn" class="btn-secondary">Clear Filters</button>
-=======
             <h1>Ulasan & Komentar Produk</h1>
             <ul class="breadcrumb">
                 <li><a href="#">Dasbor</a></li>
@@ -399,38 +348,10 @@ $error_message = $_GET['error_message'] ?? $error_message;
             </div>
             <button type="button" id="clearFiltersBtn" class="btn-secondary" onclick="window.location.href='reviews.php'">Bersihkan Filter</button>
         </form>
->>>>>>> ce5ec8126cfcf8cc0467651fa803dc3855ca4986
     </div>
     <div class="table-data">
         <div class="order">
             <div class="head">
-<<<<<<< HEAD
-                <h3>Customer Reviews</h3>
-                </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Reviewer</th>
-                        <th>Rating</th>
-                        <th>Comment</th>
-                        <th>Status</th>
-                        <th>Review Date</th>
-                        <th>Reply</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody id="reviewsTableBody">
-                    <tr>
-                        <td colspan="8" style="text-align: center; padding: 20px;">Loading reviews...</td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="pagination-controls" style="text-align: center; margin-top: 20px;">
-                <button id="prevPageBtn" class="btn-secondary">Previous</button>
-                <span id="currentPage">Page 1</span> / <span id="totalPages">1</span>
-                <button id="nextPageBtn" class="btn-secondary">Next</button>
-=======
                 <h3>Ulasan Pelanggan</h3>
             </div>
             <table>
@@ -500,14 +421,14 @@ $error_message = $_GET['error_message'] ?? $error_message;
                                         </form>
                                     <?php endif; ?>
                                     <button class="btn-action edit-review"
-                                                data-id="<?php echo htmlspecialchars($review['id_review']); ?>"
-                                                data-productid="<?php echo htmlspecialchars($review['idproduk']); ?>"
-                                                data-reviewername="<?php echo htmlspecialchars($review['reviewer_name']); ?>"
-                                                data-revieweremail="<?php echo htmlspecialchars($review['reviewer_email']); ?>"
-                                                data-rating="<?php echo htmlspecialchars($review['rating_produk']); ?>"
-                                                data-comment="<?php echo htmlspecialchars($review['komentar']); ?>"
-                                                data-status="<?php echo htmlspecialchars($review['status']); ?>"
-                                                data-replytext=""><i class='bx bx-edit-alt'></i></button>
+                                            data-id="<?php echo htmlspecialchars($review['id_review']); ?>"
+                                            data-productid="<?php echo htmlspecialchars($review['idproduk']); ?>"
+                                            data-reviewername="<?php echo htmlspecialchars($review['reviewer_name']); ?>"
+                                            data-revieweremail="<?php echo htmlspecialchars($review['reviewer_email']); ?>"
+                                            data-rating="<?php echo htmlspecialchars($review['rating_produk']); ?>"
+                                            data-comment="<?php echo htmlspecialchars($review['komentar']); ?>"
+                                            data-status="<?php echo htmlspecialchars($review['status']); ?>"
+                                            data-replytext=""><i class='bx bx-edit-alt'></i></button>
                                     <form action="" method="POST" style="display: inline-block;" onsubmit="return confirm('Apakah Anda yakin ingin menghapus ulasan ini? Tindakan ini tidak dapat dibatalkan.');">
                                         <input type="hidden" name="action" value="delete_review">
                                         <input type="hidden" name="review_id" value="<?php echo htmlspecialchars($review['id_review']); ?>">
@@ -527,55 +448,11 @@ $error_message = $_GET['error_message'] ?? $error_message;
                 <a href="reviews.php?status=<?php echo htmlspecialchars($statusFilter); ?>&rating=<?php echo htmlspecialchars($ratingFilter); ?>&search=<?php echo htmlspecialchars($searchTerm); ?>&page=<?php echo max(1, $currentPage - 1); ?>" class="btn-secondary <?php echo ($currentPage == 1) ? 'disabled' : ''; ?>">Sebelumnya</a>
                 <span id="currentPage">Halaman <?php echo htmlspecialchars($currentPage); ?></span> / <span id="totalPages"><?php echo htmlspecialchars($totalPages); ?></span>
                 <a href="reviews.php?status=<?php echo htmlspecialchars($statusFilter); ?>&rating=<?php echo htmlspecialchars($ratingFilter); ?>&search=<?php echo htmlspecialchars($searchTerm); ?>&page=<?php echo min($totalPages, $currentPage + 1); ?>" class="btn-secondary <?php echo ($currentPage == $totalPages) ? 'disabled' : ''; ?>">Berikutnya</a>
->>>>>>> ce5ec8126cfcf8cc0467651fa803dc3855ca4986
             </div>
         </div>
     </div>
 </main>
 
-<<<<<<< HEAD
-<div id="replyModal" class="modal">
-    <div class="modal-content">
-        <span class="close-button">&times;</span>
-        <h2>Reply to Review</h2>
-        <form id="replyForm">
-            <input type="hidden" id="replyReviewId">
-            <div class="form-group">
-                <label for="reviewTextDisplay">Original Comment:</label>
-                <p id="reviewTextDisplay" style="background-color: #f0f0f0; padding: 10px; border-radius: 5px; margin-bottom: 15px;"></p>
-            </div>
-            <div class="form-group">
-                <label for="replyTextInput">Your Reply:</label>
-                <textarea id="replyTextInput" rows="5" placeholder="Type your reply here..." required></textarea>
-            </div>
-            <button type="submit" class="btn-primary">Send Reply</button>
-            <button type="button" class="btn-secondary" id="cancelReply">Cancel</button>
-        </form>
-    </div>
-</div>
-
-<div id="editReviewModal" class="modal">
-    <div class="modal-content">
-        <span class="close-button" id="closeEditModalBtn">&times;</span>
-        <h2>Edit Review</h2>
-        <form id="editReviewForm">
-            <input type="hidden" id="editReviewId">
-            <div class="form-group">
-                <label for="editProductId">Product:</label>
-                <select id="editProductId" name="product_id" class="analytics-dropdown" required>
-                    </select>
-            </div>
-            <div class="form-group">
-                <label for="editReviewerName">Reviewer Name:</label>
-                <input type="text" id="editReviewerName" name="reviewer_name" class="form-input" required>
-            </div>
-            <div class="form-group">
-                <label for="editReviewerEmail">Reviewer Email (Optional):</label>
-                <input type="email" id="editReviewerEmail" name="reviewer_email" class="form-input">
-            </div>
-            <div class="form-group">
-                <label for="editRating">Rating:</label>
-=======
 <div id="editReviewModal" class="modal">
     <div class="modal-content">
         <span class="close-button" id="closeEditModalBtn">&times;</span>
@@ -604,7 +481,6 @@ $error_message = $_GET['error_message'] ?? $error_message;
                 <input type="email" id="editReviewerEmail" name="reviewer_email" class="form-input" readonly> </div>
             <div class="form-group">
                 <label for="editRating">Peringkat:</label>
->>>>>>> ce5ec8126cfcf8cc0467651fa803dc3855ca4986
                 <div class="star-rating-input" id="editRatingInput">
                     <i class="bx bx-star" data-rating="1"></i>
                     <i class="bx bx-star" data-rating="2"></i>
@@ -615,30 +491,12 @@ $error_message = $_GET['error_message'] ?? $error_message;
                 </div>
             </div>
             <div class="form-group">
-<<<<<<< HEAD
-                <label for="editComment">Comment:</label>
-=======
                 <label for="editComment">Komentar:</label>
->>>>>>> ce5ec8126cfcf8cc0467651fa803dc3855ca4986
                 <textarea id="editComment" name="comment" rows="6" class="form-input" required></textarea>
             </div>
             <div class="form-group">
                 <label for="editStatus">Status:</label>
                 <select id="editStatus" name="status" class="analytics-dropdown">
-<<<<<<< HEAD
-                    <option value="pending">Pending</option>
-                    <option value="approved">Approved</option>
-                    <option value="rejected">Rejected</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="editReplyText">Admin Reply (Optional):</label>
-                <textarea id="editReplyText" name="reply_text" rows="3" class="form-input"></textarea>
-            </div>
-            
-            <button type="submit" class="btn-primary">Save Changes</button>
-            <button type="button" class="btn-secondary" id="cancelEdit">Cancel</button>
-=======
                     <option value="pending">Tertunda</option>
                     <option value="approved">Disetujui</option>
                     <option value="rejected">Ditolak</option>
@@ -647,66 +505,19 @@ $error_message = $_GET['error_message'] ?? $error_message;
 
             <button type="submit" class="btn-primary">Simpan Perubahan</button>
             <button type="button" class="btn-secondary" id="cancelEdit">Batal</button>
->>>>>>> ce5ec8126cfcf8cc0467651fa803dc3855ca4986
         </form>
     </div>
 </div>
 
-<<<<<<< HEAD
-<script src="../Admin-HTML/js/scriptadmin.js"></script> 
-<?php
-include '../views/footeradmin.php'; // Menggunakan footeradmin.php yang sama
-=======
 <script src="../Admin-HTML/js/scriptadmin.js"></script>
 <?php
 include '../views/footeradmin.php';
->>>>>>> ce5ec8126cfcf8cc0467651fa803dc3855ca4986
 ?>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     console.log("Reviews page DOMContentLoaded.");
 
-<<<<<<< HEAD
-    // Memanggil fungsi inisialisasi manajemen review
-    initReviewsPage(); 
-});
-
-// Fungsi untuk menampilkan bintang berdasarkan rating
-function getStarRatingHtml(rating) {
-    let starsHtml = '';
-    for (let i = 1; i <= 5; i++) {
-        if (i <= rating) {
-            starsHtml += '<i class="bx bxs-star star-filled"></i>'; // Bintang penuh
-        } else {
-            starsHtml += '<i class="bx bx-star star-empty"></i>'; // Bintang kosong
-        }
-    }
-    return `<div class="star-rating">${starsHtml}</div>`;
-}
-
-// Fungsi utama untuk manajemen halaman reviews
-function initReviewsPage() {
-    console.log("initReviewsPage() called.");
-
-    const reviewsTableBody = document.getElementById('reviewsTableBody');
-    const reviewStatusFilter = document.getElementById('reviewStatusFilter');
-    const reviewRatingFilter = document.getElementById('reviewRatingFilter');
-    const reviewSearchInput = document.getElementById('reviewSearchInput');
-    const reviewSearchButton = document.getElementById('reviewSearchButton');
-    const clearFiltersBtn = document.getElementById('clearFiltersBtn');
-
-    // Reply Modal elements
-    const replyModal = document.getElementById('replyModal');
-    const closeReplyModalBtn = replyModal ? replyModal.querySelector('.close-button') : null;
-    const cancelReplyBtn = document.getElementById('cancelReply');
-    const replyForm = document.getElementById('replyForm');
-    const replyReviewIdInput = document.getElementById('replyReviewId');
-    const reviewTextDisplay = document.getElementById('reviewTextDisplay');
-    const replyTextInput = document.getElementById('replyTextInput');
-
-    // Edit Review Modal elements (NEW)
-=======
     window.onclick = (event) => {
         const editReviewModal = document.getElementById('editReviewModal');
         if (event.target === editReviewModal) {
@@ -719,7 +530,6 @@ function initReviewsPage() {
     };
 
     // --- Modal Edit Logic ---
->>>>>>> ce5ec8126cfcf8cc0467651fa803dc3855ca4986
     const editReviewModal = document.getElementById('editReviewModal');
     const closeEditModalBtn = document.getElementById('closeEditModalBtn');
     const cancelEditBtn = document.getElementById('cancelEdit');
@@ -732,281 +542,6 @@ function initReviewsPage() {
     const editSelectedRatingInput = document.getElementById('editSelectedRating');
     const editCommentInput = document.getElementById('editComment');
     const editStatusSelect = document.getElementById('editStatus');
-<<<<<<< HEAD
-    const editReplyTextInput = document.getElementById('editReplyText');
-
-    let currentEditRating = 0; // Untuk menyimpan rating yang dipilih di modal edit
-
-    // Pagination elements
-    const prevPageBtn = document.getElementById('prevPageBtn');
-    const nextPageBtn = document.getElementById('nextPageBtn');
-    const currentPageSpan = document.getElementById('currentPage');
-    const totalPagesSpan = document.getElementById('totalPages');
-
-    let currentPage = 1;
-    const itemsPerPage = 10; // Jumlah ulasan per halaman
-
-    // --- Fungsionalitas Umum ---
-
-    // Fungsi untuk mengambil dan merender ulasan
-    function fetchAndRenderReviews() {
-        reviewsTableBody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 20px;">Loading reviews...</td></tr>';
-
-        const status = reviewStatusFilter ? reviewStatusFilter.value : 'all';
-        const rating = reviewRatingFilter ? reviewRatingFilter.value : 'all';
-        const search = reviewSearchInput ? reviewSearchInput.value : '';
-
-        // Membangun URL API dengan parameter filter dan pagination
-        const apiUrl = `api/get_product_reviews.php?status=${status}&rating=${rating}&search=${search}&page=${currentPage}&limit=${itemsPerPage}`;
-        
-        fetch(apiUrl)
-            .then(response => response.json())
-            .then(data => {
-                reviewsTableBody.innerHTML = ''; // Kosongkan tabel
-                if (data.reviews && data.reviews.length > 0) {
-                    data.reviews.forEach(review => {
-                        const row = document.createElement('tr');
-                        const statusClass = review.status ? review.status.toLowerCase() : '';
-
-                        row.innerHTML = `
-                            <td>
-                                <img src="${review.product_image || '../Admin-HTML/images/default-product.webp'}" alt="Product" style="width: 40px; height: 40px; border-radius: 5px; margin-right: 10px;">
-                                <p>${review.product_name || 'N/A'}</p>
-                            </td>
-                            <td>${review.reviewer_name || 'Anonymous'}</td>
-                            <td>${getStarRatingHtml(review.rating)}</td>
-                            <td>${review.comment ? (review.comment.length > 100 ? review.comment.substring(0, 100) + '...' : review.comment) : 'No comment'}</td>
-                            <td><span class="status ${statusClass}">${review.status || 'N/A'}</span></td>
-                            <td>${new Date(review.review_date).toLocaleDateString('id-ID')}</td>
-                            <td>${review.reply_text ? `Replied: ${review.reply_text.substring(0, 50)}...` : '<span style="color: #888;">No Reply</span>'}</td>
-                            <td>
-                                ${review.status !== 'approved' ? `<button class="btn-action approve-review" data-id="${review.id}"><i class='bx bx-check-circle'></i></button>` : ''}
-                                ${review.status !== 'rejected' ? `<button class="btn-action reject-review" data-id="${review.id}"><i class='bx bx-x-circle'></i></button>` : ''}
-                                <button class="btn-action reply-review" data-id="${review.id}" data-comment="${review.comment}"><i class='bx bx-reply'></i></button>
-                                <button class="btn-action edit-review" data-id="${review.id}"><i class='bx bx-edit-alt'></i></button> <button class="btn-action delete-review" data-id="${review.id}"><i class='bx bx-trash'></i></button>
-                            </td>
-                        `;
-                        reviewsTableBody.appendChild(row);
-                    });
-
-                    // Update pagination info
-                    totalPagesSpan.textContent = data.total_pages;
-                    currentPageSpan.textContent = currentPage;
-                    prevPageBtn.disabled = currentPage === 1;
-                    nextPageBtn.disabled = currentPage === data.total_pages;
-
-                    // Add event listeners for new buttons
-                    addReviewButtonListeners();
-
-                } else {
-                    reviewsTableBody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 20px;">No reviews found based on current filters.</td></tr>';
-                    totalPagesSpan.textContent = '1';
-                    currentPageSpan.textContent = '1';
-                    prevPageBtn.disabled = true;
-                    nextPageBtn.disabled = true;
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching reviews:', error);
-                reviewsTableBody.innerHTML = '<tr><td colspan="8" style="text-align: center; padding: 20px; color: red;">Failed to load reviews. Please try again.</td></tr>';
-            });
-    }
-
-    // Fungsi untuk menambahkan event listener ke tombol aksi (Approve, Reject, Reply, Edit, Delete)
-    function addReviewButtonListeners() {
-        document.querySelectorAll('.approve-review').forEach(button => {
-            button.onclick = (e) => {
-                const reviewId = e.currentTarget.dataset.id;
-                updateReviewStatus(reviewId, 'approved');
-            };
-        });
-        document.querySelectorAll('.reject-review').forEach(button => {
-            button.onclick = (e) => {
-                const reviewId = e.currentTarget.dataset.id;
-                updateReviewStatus(reviewId, 'rejected');
-            };
-        });
-        document.querySelectorAll('.reply-review').forEach(button => {
-            button.onclick = (e) => {
-                const reviewId = e.currentTarget.dataset.id;
-                const commentText = e.currentTarget.dataset.comment;
-                openReplyModal(reviewId, commentText);
-            };
-        });
-        document.querySelectorAll('.edit-review').forEach(button => { // NEW EDIT LISTENER
-            button.onclick = (e) => {
-                const reviewId = e.currentTarget.dataset.id;
-                fetchReviewForEdit(reviewId);
-            };
-        });
-        document.querySelectorAll('.delete-review').forEach(button => {
-            button.onclick = (e) => {
-                const reviewId = e.currentTarget.dataset.id;
-                deleteReview(reviewId);
-            };
-        });
-    }
-
-    // Fungsi untuk memperbarui status ulasan
-    function updateReviewStatus(reviewId, newStatus) {
-        if (!confirm(`Are you sure you want to ${newStatus} this review?`)) {
-            return;
-        }
-        fetch('api/update_review_status.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ review_id: reviewId, new_status: newStatus })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alertSystem.show({ type: 'success', title: 'Success', message: `Review ${newStatus} successfully!` });
-                fetchAndRenderReviews(); // Refresh tabel setelah update
-            } else {
-                alertSystem.show({ type: 'error', title: 'Error', message: data.message || 'Failed to update review status.' });
-            }
-        })
-        .catch(error => console.error('Error updating review status:', error));
-    }
-
-    // --- Fungsionalitas Reply Modal (Existing) ---
-
-    // Fungsi untuk membuka modal balasan
-    function openReplyModal(reviewId, commentText) {
-        replyReviewIdInput.value = reviewId;
-        reviewTextDisplay.textContent = commentText;
-        replyTextInput.value = ''; // Kosongkan input balasan
-        replyModal.style.display = 'block';
-    }
-
-    // Fungsi untuk menutup modal balasan
-    function closeReplyModal() {
-        replyModal.style.display = 'none';
-        replyForm.reset();
-    }
-
-    // Event listeners untuk modal balasan
-    if (closeReplyModalBtn) {
-        closeReplyModalBtn.onclick = closeReplyModal;
-    }
-    if (cancelReplyBtn) {
-        cancelReplyBtn.onclick = closeReplyModal;
-    }
-    window.onclick = (event) => {
-        if (event.target === replyModal) {
-            closeReplyModal();
-        }
-    };
-
-    // Handler submit form balasan
-    if (replyForm) {
-        replyForm.onsubmit = (e) => {
-            e.preventDefault();
-            const reviewId = replyReviewIdInput.value;
-            const replyText = replyTextInput.value.trim();
-            if (!replyText) {
-                alertSystem.show({ type: 'warning', title: 'Input Needed', message: 'Reply cannot be empty!' });
-                return;
-            }
-            sendReply(reviewId, replyText);
-        };
-    }
-
-    // Fungsi untuk mengirim balasan admin
-    function sendReply(reviewId, replyText) {
-        const adminId = 1; // Ganti dengan ID admin yang sebenarnya (misalnya dari PHP session)
-        fetch('api/add_review_reply.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ review_id: reviewId, admin_id: adminId, reply_text: replyText })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alertSystem.show({ type: 'success', title: 'Success', message: 'Reply sent successfully!' });
-                closeReplyModal();
-                fetchAndRenderReviews(); // Refresh tabel setelah balasan
-            } else {
-                alertSystem.show({ type: 'error', title: 'Error', message: data.message || 'Failed to send reply.' });
-            }
-        })
-        .catch(error => console.error('Error sending reply:', error));
-    }
-
-    // --- Fungsionalitas Edit Review Modal (NEW) ---
-
-    // Fungsi untuk mengambil detail review dan mengisi form edit
-    function fetchReviewForEdit(reviewId) {
-        fetch(`api/get_review_details.php?id=${reviewId}`) // Anda perlu membuat API ini
-            .then(response => response.json())
-            .then(data => {
-                if (data.success && data.review) {
-                    const review = data.review;
-                    editReviewIdInput.value = review.id;
-                    editReviewerNameInput.value = review.reviewer_name;
-                    editReviewerEmailInput.value = review.reviewer_email || '';
-                    editCommentInput.value = review.comment;
-                    editStatusSelect.value = review.status;
-                    editReplyTextInput.value = review.reply_text || '';
-
-                    // Setel rating bintang di modal edit
-                    currentEditRating = parseInt(review.rating);
-                    editSelectedRatingInput.value = currentEditRating;
-                    updateEditStarDisplay(currentEditRating);
-
-                    // Ambil daftar produk dan pilih produk yang relevan
-                    fetchProductsForEditModal(review.product_id);
-
-                    editReviewModal.style.display = 'block';
-                } else {
-                    alertSystem.show({ type: 'error', title: 'Error', message: data.message || 'Failed to load review details.' });
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching review for edit:', error);
-                alertSystem.show({ type: 'error', title: 'Error', message: 'An error occurred while fetching review details.' });
-            });
-    }
-
-    // Fungsi untuk mengisi dropdown produk di modal edit
-    function fetchProductsForEditModal(selectedProductId = null) {
-        // Kosongkan dan reset pilihan
-        editProductIdSelect.innerHTML = '<option value="">-- Select a Product --</option>';
-        editProductIdSelect.disabled = false;
-
-        fetch('api/get_products.php') // Menggunakan API yang sama untuk daftar produk
-            .then(response => response.json())
-            .then(data => {
-                if (data.success && data.products.length > 0) {
-                    data.products.forEach(product => {
-                        const option = document.createElement('option');
-                        option.value = product.id;
-                        option.textContent = product.name;
-                        if (selectedProductId && parseInt(product.id) === parseInt(selectedProductId)) {
-                            option.selected = true;
-                        }
-                        editProductIdSelect.appendChild(option);
-                    });
-                } else {
-                    const option = document.createElement('option');
-                    option.value = "";
-                    option.textContent = "No products found.";
-                    editProductIdSelect.appendChild(option);
-                    editProductIdSelect.disabled = true;
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching products for edit modal:', error);
-                const option = document.createElement('option');
-                option.value = "";
-                option.textContent = "Failed to load products.";
-                editProductIdSelect.appendChild(option);
-                editProductIdSelect.disabled = true;
-            });
-    }
-
-    // Logika untuk sistem rating bintang di modal edit
-=======
 
     let currentEditRating = 0;
 
@@ -1049,7 +584,6 @@ function initReviewsPage() {
     };
 
     // Star rating logic for edit modal
->>>>>>> ce5ec8126cfcf8cc0467651fa803dc3855ca4986
     if (editRatingInputDiv) {
         editRatingInputDiv.addEventListener('click', function(e) {
             const star = e.target.closest('.bx');
@@ -1064,170 +598,25 @@ function initReviewsPage() {
             const star = e.target.closest('.bx');
             if (star && star.dataset.rating) {
                 const hoverRating = parseInt(star.dataset.rating);
-<<<<<<< HEAD
-                updateEditStarDisplay(hoverRating, true);
-=======
                 updateEditStarDisplay(hoverRating);
->>>>>>> ce5ec8126cfcf8cc0467651fa803dc3855ca4986
             }
         });
 
         editRatingInputDiv.addEventListener('mouseout', function() {
-<<<<<<< HEAD
-            updateEditStarDisplay(currentEditRating); // Kembali ke rating yang dipilih saat mouse keluar
-=======
             updateEditStarDisplay(currentEditRating);
->>>>>>> ce5ec8126cfcf8cc0467651fa803dc3855ca4986
         });
 
         function updateEditStarDisplay(ratingToDisplay) {
             editRatingInputDiv.querySelectorAll('.bx').forEach((star, index) => {
                 if (index < ratingToDisplay) {
                     star.classList.remove('bx-star');
-<<<<<<< HEAD
-                    star.classList.add('bxs-star'); // Bintang penuh
-=======
-                    star.classList.add('bxs-star'); // Bintang terisi
->>>>>>> ce5ec8126cfcf8cc0467651fa803dc3855ca4986
+                    star.classList.add('bxs-star');
                 } else {
                     star.classList.remove('bxs-star');
-                    star.classList.add('bx-star'); // Bintang kosong
+                    star.classList.add('bx-star');
                 }
             });
         }
     }
-<<<<<<< HEAD
-
-    // Fungsi untuk menutup modal edit
-    function closeEditModal() {
-        editReviewModal.style.display = 'none';
-        editReviewForm.reset();
-        currentEditRating = 0; // Reset rating tampilan
-        updateEditStarDisplay(currentEditRating);
-    }
-
-    // Event listeners untuk modal edit
-    if (closeEditModalBtn) {
-        closeEditModalBtn.onclick = closeEditModal;
-    }
-    if (cancelEditBtn) {
-        cancelEditBtn.onclick = closeEditModal;
-    }
-    window.onclick = (event) => { // Pastikan ini juga menangani editReviewModal
-        if (event.target === replyModal) {
-            closeReplyModal();
-        } else if (event.target === editReviewModal) {
-            closeEditModal();
-        }
-    };
-
-    // Handler submit form edit
-    if (editReviewForm) {
-        editReviewForm.onsubmit = (e) => {
-            e.preventDefault();
-            const reviewId = editReviewIdInput.value;
-            const formData = new FormData(editReviewForm);
-            const reviewData = Object.fromEntries(formData.entries());
-            reviewData.review_id = reviewId; // Tambahkan ID review ke data
-
-            if (parseInt(reviewData.rating) === 0) {
-                alertSystem.show({ type: 'warning', title: 'Input Needed', message: 'Please select a rating for the review.' });
-                return;
-            }
-
-            fetch('api/update_review.php', { // Anda perlu membuat API ini
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(reviewData)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alertSystem.show({ type: 'success', title: 'Success', message: 'Review updated successfully!' });
-                    closeEditModal();
-                    fetchAndRenderReviews(); // Refresh tabel setelah update
-                } else {
-                    alertSystem.show({ type: 'error', title: 'Error', message: data.message || 'Failed to update review.' });
-                }
-            })
-            .catch(error => {
-                console.error('Error updating review:', error);
-                alertSystem.show({ type: 'error', title: 'Error', message: 'An error occurred while updating the review.' });
-            });
-        };
-    }
-
-    // --- Fungsionalitas Delete Review (Existing, but re-checked) ---
-
-    // Fungsi untuk menghapus ulasan
-    function deleteReview(reviewId) {
-        if (!confirm('Are you sure you want to delete this review? This action cannot be undone.')) {
-            return;
-        }
-        fetch('api/delete_review.php', { // Ini bisa berupa soft delete (is_deleted = 1)
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ review_id: reviewId })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alertSystem.show({ type: 'warning', title: 'Deleted', message: 'Review deleted successfully!' });
-                fetchAndRenderReviews(); // Refresh tabel setelah hapus
-            } else {
-                alertSystem.show({ type: 'error', title: 'Error', message: data.message || 'Failed to delete review.' });
-            }
-        })
-        .catch(error => console.error('Error deleting review:', error));
-    }
-
-    // --- Event listeners untuk filter dan pagination (Existing) ---
-    if (reviewStatusFilter) {
-        reviewStatusFilter.addEventListener('change', () => { currentPage = 1; fetchAndRenderReviews(); });
-    }
-    if (reviewRatingFilter) {
-        reviewRatingFilter.addEventListener('change', () => { currentPage = 1; fetchAndRenderReviews(); });
-    }
-    if (reviewSearchButton) {
-        reviewSearchButton.addEventListener('click', () => { currentPage = 1; fetchAndRenderReviews(); });
-    }
-    if (reviewSearchInput) {
-        reviewSearchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') { currentPage = 1; fetchAndRenderReviews(); }
-        });
-    }
-    if (clearFiltersBtn) {
-        clearFiltersBtn.addEventListener('click', () => {
-            if (reviewStatusFilter) reviewStatusFilter.value = 'all';
-            if (reviewRatingFilter) reviewRatingFilter.value = 'all';
-            if (reviewSearchInput) reviewSearchInput.value = '';
-            currentPage = 1;
-            fetchAndRenderReviews();
-        });
-    }
-
-    if (prevPageBtn) {
-        prevPageBtn.addEventListener('click', () => {
-            if (currentPage > 1) {
-                currentPage--;
-                fetchAndRenderReviews();
-            }
-        });
-    }
-    if (nextPageBtn) {
-        nextPageBtn.addEventListener('click', () => {
-            const totalPages = parseInt(totalPagesSpan.textContent);
-            if (currentPage < totalPages) {
-                currentPage++;
-                fetchAndRenderReviews();
-            }
-        });
-    }
-
-    // Panggil pertama kali saat halaman dimuat
-    fetchAndRenderReviews();
-}
-=======
 });
->>>>>>> ce5ec8126cfcf8cc0467651fa803dc3855ca4986
 </script>

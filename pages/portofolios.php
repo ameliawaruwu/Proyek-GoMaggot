@@ -58,4 +58,4 @@
 </div>
 
 <?php include '../partials/footer.php';  ?>
-<script src="../Esa-HTML/js/galeri.js"></script>
+<script src="../Admin-HTML/js/galeri.js"></script>

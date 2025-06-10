@@ -1,7 +1,7 @@
 <?php
 // artikel/add_artikel.php - Form Tambah Artikel (Create)
 
-
+ include '../logic/update/auth.php'; 
 include '../configdb.php';
 
 $message = '';

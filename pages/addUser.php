@@ -1,4 +1,5 @@
 <?php
+ include '../logic/update/auth.php'; 
 include '../views/headeradmin.php';
 include '../configdb.php'; // Include file koneksi database
 
