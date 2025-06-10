@@ -1,4 +1,6 @@
-<?php include '../views/headerFormCo.php'; ?>
+<?php include '../views/headerFormCo.php'; 
+include '../Logic/update/auth.php';
+?>
   <link rel="stylesheet" href="../Admin-HTML/css/formCo.css">
 
 <div class="container">

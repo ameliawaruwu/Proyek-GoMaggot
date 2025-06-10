@@ -1,12 +1,23 @@
 <?php
-include '../logic/update/auth.php';
+
+include '../Logic/update/auth.php'; 
 include '../views/headeradmin.php';
-include '../configdb.php'; 
+include '../configdb.php'; // Sertakan file koneksi database
+
+// Set zona waktu PHP ke Jakarta (WIB)
+// Ini adalah langkah penting agar semua fungsi date() di PHP menghasilkan waktu yang benar sesuai WIB.
 date_default_timezone_set('Asia/Jakarta');
 
-
+// *** PERBAIKAN PENTING: Atur zona waktu sesi MySQL agar konsisten dengan PHP (WIB) ***
+// Ini mengatasi masalah di mana server MySQL mungkin menggunakan zona waktu yang berbeda (misalnya SYSTEM/UTC).
 if ($conn) {
-    mysqli_query($conn, "SET time_zone = '+07:00'"); // +07:00 untuk WIB
+    if (!mysqli_query($conn, "SET time_zone = '+07:00'")) {
+        // Log error jika pengaturan zona waktu sesi MySQL gagal
+        error_log("Error setting MySQL time_zone: " . mysqli_error($conn));
+    }
+} else {
+    // Log error jika koneksi database tidak valid
+    error_log("Database connection ($conn) not established before attempting to set time_zone.");
 }
 
 // Inisialisasi variabel untuk menghindari error jika query gagal
@@ -14,21 +25,27 @@ $newOrdersCount = 0; // Ini akan diubah untuk daily visitors
 $visitorsCount = 0; // Ini akan tetap menjadi total registered users untuk tampilan card atas
 $totalSalesAmount = 0;
 
+// Tanggal hari ini dalam format YYYY-MM-DD sesuai WIB
+$today = date('Y-m-d');
+// Bulan ini dalam format YYYY-MM sesuai WIB
+$thisMonth = date('Y-m');
+
 // --- 1. Ambil Data Daily Visitors (Today) ---
-// Mengganti New Orders dengan Daily Visitors berdasarkan last_login
-$today = date('Y-m-d'); // Mengambil tanggal hari ini dalam format YYYY-MM-DD
-$sqlDailyVisitorsCard = "SELECT COUNT(DISTINCT id_pelanggan) AS daily_visitors FROM pengguna WHERE DATE(last_login) = '$today'";
+// Mengganti New Orders dengan Daily Visitors berdasarkan last_login (unique logins hari ini)
+$sqlDailyVisitorsCard = "SELECT COUNT(DISTINCT id_pelanggan) AS daily_visitors 
+                         FROM pengguna 
+                         WHERE DATE(last_login) = '$today'";
 $resultDailyVisitorsCard = mysqli_query($conn, $sqlDailyVisitorsCard);
 
 if ($resultDailyVisitorsCard) {
     $rowDailyVisitorsCard = mysqli_fetch_assoc($resultDailyVisitorsCard);
     $newOrdersCount = $rowDailyVisitorsCard['daily_visitors']; // Menggunakan variabel yang sama untuk ditampilkan di card pertama
 } else {
-    // Handle error jika query gagal (komentar ini agar tidak muncul di halaman)
-    // error_log("Error mengambil data Daily Visitors untuk card: " . mysqli_error($conn));
+    error_log("Error mengambil data Daily Visitors untuk card: " . mysqli_error($conn));
 }
 
-/////
+// --- 2. Ambil Data Total Registered Users (Untuk card atas) ---
+// Ini tetap menghitung total pengguna terdaftar, bukan harian
 $sqlTotalRegisteredUsers = "SELECT COUNT(*) AS total_visitors FROM pengguna";
 $resultTotalRegisteredUsers = mysqli_query($conn, $sqlTotalRegisteredUsers);
 
@@ -36,19 +53,21 @@ if ($resultTotalRegisteredUsers) {
     $rowTotalRegisteredUsers = mysqli_fetch_assoc($resultTotalRegisteredUsers);
     $visitorsCount = $rowTotalRegisteredUsers['total_visitors'];
 } else {
-    // error_log("Error mengambil data Total Registered Users: " . mysqli_error($conn));
+    error_log("Error mengambil data Total Registered Users: " . mysqli_error($conn));
 }
 
 // --- 3. Ambil Data Total Sales (This Month) ---
-$thisMonth = date('Y-m'); // Format YYYY-MM
-$sqlTotalSales = "SELECT SUM(total_harga) AS total_sales FROM pesanan WHERE DATE_FORMAT(tanggal_pesanan, '%Y-%m') = '$thisMonth'";
+$sqlTotalSales = "SELECT SUM(total_harga) AS total_sales 
+                  FROM pesanan 
+                  WHERE DATE_FORMAT(tanggal_pesanan, '%Y-%m') = '$thisMonth'
+                  AND status = (SELECT id_status FROM status_pesanan WHERE nama_status = 'Sudah Sampai')"; // Hanya sales yang sudah selesai
 $resultTotalSales = mysqli_query($conn, $sqlTotalSales);
 
 if ($resultTotalSales) {
     $rowTotalSales = mysqli_fetch_assoc($resultTotalSales);
     $totalSalesAmount = $rowTotalSales['total_sales'] ? $rowTotalSales['total_sales'] : 0;
 } else {
-    // error_log("Error mengambil data Total Sales: " . mysqli_error($conn));
+    error_log("Error mengambil data Total Sales: " . mysqli_error($conn));
 }
 $formattedTotalSales = "Rp " . number_format($totalSalesAmount, 0, ',', '.');
 
@@ -60,8 +79,11 @@ $salesDailyData = [];
 $salesDailyLabels = [];
 for ($i = 6; $i >= 0; $i--) {
     $date = date('Y-m-d', strtotime("-$i days"));
-    $salesDailyLabels[] = date('D, d M', strtotime($date));
-    $sqlDailySales = "SELECT SUM(total_harga) AS daily_sales FROM pesanan WHERE DATE(tanggal_pesanan) = '$date' AND status = (SELECT id_status FROM status_pesanan WHERE nama_status = 'Sudah Sampai')";
+    $salesDailyLabels[] = date('D, d M', strtotime($date)); // cth: Thu, 05 Jun
+    $sqlDailySales = "SELECT SUM(total_harga) AS daily_sales 
+                      FROM pesanan 
+                      WHERE DATE(tanggal_pesanan) = '$date' 
+                      AND status = (SELECT id_status FROM status_pesanan WHERE nama_status = 'Sudah Sampai')";
     $resultDailySales = mysqli_query($conn, $sqlDailySales);
     $rowDailySales = mysqli_fetch_assoc($resultDailySales);
     $salesDailyData[] = $rowDailySales['daily_sales'] ? (float)$rowDailySales['daily_sales'] : 0;
@@ -71,10 +93,14 @@ for ($i = 6; $i >= 0; $i--) {
 $salesWeeklyData = [];
 $salesWeeklyLabels = [];
 for ($i = 6; $i >= 0; $i--) {
+    // Pastikan ini dimulai dari hari Senin (1) dan berakhir di hari Minggu (7)
     $startOfWeek = date('Y-m-d', strtotime("monday this week -{$i} weeks"));
     $endOfWeek = date('Y-m-d', strtotime("sunday this week -{$i} weeks"));
-    $salesWeeklyLabels[] = date('M d', strtotime($startOfWeek)) . ' - ' . date('M d', strtotime($endOfWeek));
-    $sqlWeeklySales = "SELECT SUM(total_harga) AS weekly_sales FROM pesanan WHERE tanggal_pesanan BETWEEN '$startOfWeek' AND '$endOfWeek' AND status = (SELECT id_status FROM status_pesanan WHERE nama_status = 'Sudah Sampai')";
+    $salesWeeklyLabels[] = date('d M', strtotime($startOfWeek)) . ' - ' . date('d M', strtotime($endOfWeek));
+    $sqlWeeklySales = "SELECT SUM(total_harga) AS weekly_sales 
+                       FROM pesanan 
+                       WHERE tanggal_pesanan BETWEEN '$startOfWeek 00:00:00' AND '$endOfWeek 23:59:59' 
+                       AND status = (SELECT id_status FROM status_pesanan WHERE nama_status = 'Sudah Sampai')";
     $resultWeeklySales = mysqli_query($conn, $sqlWeeklySales);
     $rowWeeklySales = mysqli_fetch_assoc($resultWeeklySales);
     $salesWeeklyData[] = $rowWeeklySales['weekly_sales'] ? (float)$rowWeeklySales['weekly_sales'] : 0;
@@ -86,51 +112,63 @@ $salesMonthlyLabels = [];
 for ($i = 11; $i >= 0; $i--) {
     $month = date('Y-m', strtotime("-$i months"));
     $salesMonthlyLabels[] = date('M Y', strtotime($month . '-01'));
-    $sqlMonthlySales = "SELECT SUM(total_harga) AS monthly_sales FROM pesanan WHERE DATE_FORMAT(tanggal_pesanan, '%Y-%m') = '$month' AND status = (SELECT id_status FROM status_pesanan WHERE nama_status = 'Sudah Sampai')";
+    $sqlMonthlySales = "SELECT SUM(total_harga) AS monthly_sales 
+                        FROM pesanan 
+                        WHERE DATE_FORMAT(tanggal_pesanan, '%Y-%m') = '$month' 
+                        AND status = (SELECT id_status FROM status_pesanan WHERE nama_status = 'Sudah Sampai')";
     $resultMonthlySales = mysqli_query($conn, $sqlMonthlySales);
     $rowMonthlySales = mysqli_fetch_assoc($resultMonthlySales);
     $salesMonthlyData[] = $rowMonthlySales['monthly_sales'] ? (float)$rowMonthlySales['monthly_sales'] : 0;
 }
 
-// Sales Analytics: Quarterly (Last 3 Months)
+// Sales Analytics: Quarterly (Last 3 Months) - Labels sudah benar
 $sales3MonthsData = [];
 $sales3MonthsLabels = [];
 for ($i = 2; $i >= 0; $i--) {
     $month = date('Y-m', strtotime("-$i months"));
     $sales3MonthsLabels[] = date('M Y', strtotime($month . '-01'));
-    $sql3MonthsSales = "SELECT SUM(total_harga) AS monthly_sales FROM pesanan WHERE DATE_FORMAT(tanggal_pesanan, '%Y-%m') = '$month' AND status = (SELECT id_status FROM status_pesanan WHERE nama_status = 'Sudah Sampai')";
+    $sql3MonthsSales = "SELECT SUM(total_harga) AS monthly_sales 
+                        FROM pesanan 
+                        WHERE DATE_FORMAT(tanggal_pesanan, '%Y-%m') = '$month' 
+                        AND status = (SELECT id_status FROM status_pesanan WHERE nama_status = 'Sudah Sampai')";
     $result3MonthsSales = mysqli_query($conn, $sql3MonthsSales);
     $row3MonthsSales = mysqli_fetch_assoc($result3MonthsSales);
     $sales3MonthsData[] = $row3MonthsSales['monthly_sales'] ? (float)$row3MonthsSales['monthly_sales'] : 0;
 }
 
-// Sales Analytics: Last 6 Months
+// Sales Analytics: Last 6 Months - Labels sudah benar
 $sales6MonthsData = [];
 $sales6MonthsLabels = [];
 for ($i = 5; $i >= 0; $i--) {
     $month = date('Y-m', strtotime("-$i months"));
     $sales6MonthsLabels[] = date('M Y', strtotime($month . '-01'));
-    $sql6MonthsSales = "SELECT SUM(total_harga) AS monthly_sales FROM pesanan WHERE DATE_FORMAT(tanggal_pesanan, '%Y-%m') = '$month' AND status = (SELECT id_status FROM status_pesanan WHERE nama_status = 'Sudah Sampai')";
+    $sql6MonthsSales = "SELECT SUM(total_harga) AS monthly_sales 
+                        FROM pesanan 
+                        WHERE DATE_FORMAT(tanggal_pesanan, '%Y-%m') = '$month' 
+                        AND status = (SELECT id_status FROM status_pesanan WHERE nama_status = 'Sudah Sampai')";
     $result6MonthsSales = mysqli_query($conn, $sql6MonthsSales);
     $row6MonthsSales = mysqli_fetch_assoc($result6MonthsSales);
     $sales6MonthsData[] = $row6MonthsSales['monthly_sales'] ? (float)$row6MonthsSales['monthly_sales'] : 0;
 }
 
-// Sales Analytics: Last 9 Months
+// Sales Analytics: Last 9 Months - Labels sudah benar
 $sales9MonthsData = [];
 $sales9MonthsLabels = [];
 for ($i = 8; $i >= 0; $i--) {
     $month = date('Y-m', strtotime("-$i months"));
     $sales9MonthsLabels[] = date('M Y', strtotime($month . '-01'));
-    $sql9MonthsSales = "SELECT SUM(total_harga) AS monthly_sales FROM pesanan WHERE DATE_FORMAT(tanggal_pesanan, '%Y-%m') = '$month' AND status = (SELECT id_status FROM status_pesanan WHERE nama_status = 'Sudah Sampai')";
+    $sql9MonthsSales = "SELECT SUM(total_harga) AS monthly_sales 
+                        FROM pesanan 
+                        WHERE DATE_FORMAT(tanggal_pesanan, '%Y-%m') = '$month' 
+                        AND status = (SELECT id_status FROM status_pesanan WHERE nama_status = 'Sudah Sampai')";
     $result9MonthsSales = mysqli_query($conn, $sql9MonthsSales);
     $row9MonthsSales = mysqli_fetch_assoc($result9MonthsSales);
     $sales9MonthsData[] = $row9MonthsSales['monthly_sales'] ? (float)$row9MonthsSales['monthly_sales'] : 0;
 }
 
-// Sales Analytics: Yearly (Last 12 Months)
-$salesYearlyData = $salesMonthlyData; // Menggunakan data monthly karena sudah 12 bulan
-$salesYearlyLabels = $salesMonthlyLabels; // Menggunakan data monthly karena sudah 12 bulan
+// Sales Analytics: Yearly (Last 12 Months) - Ini sudah benar, menggunakan data bulanan 12 bulan
+$salesYearlyData = $salesMonthlyData;
+$salesYearlyLabels = $salesMonthlyLabels;
 
 
 // --- Visitor Statistics: Daily (Last 7 Days based on last_login) ---
@@ -139,10 +177,10 @@ $visitorDailyLabels = [];
 for ($i = 6; $i >= 0; $i--) {
     $date = date('Y-m-d', strtotime("-$i days"));
     $visitorDailyLabels[] = date('D, d M', strtotime($date));
-    // Query yang sudah benar untuk daily unique logins
+    // Query untuk daily unique logins berdasarkan last_login (dengan zona waktu sesi yang sudah diatur)
     $sqlDailyVisitors = "SELECT COUNT(DISTINCT id_pelanggan) AS daily_visitors
-                          FROM pengguna
-                          WHERE DATE(last_login) = '$date'";
+                         FROM pengguna
+                         WHERE DATE(last_login) = '$date'";
     $resultDailyVisitors = mysqli_query($conn, $sqlDailyVisitors);
     $rowDailyVisitors = mysqli_fetch_assoc($resultDailyVisitors);
     $visitorDailyData[] = $rowDailyVisitors['daily_visitors'] ? (int)$rowDailyVisitors['daily_visitors'] : 0;
@@ -154,11 +192,11 @@ $visitorWeeklyLabels = [];
 for ($i = 6; $i >= 0; $i--) {
     $startOfWeek = date('Y-m-d', strtotime("monday this week -{$i} weeks"));
     $endOfWeek = date('Y-m-d', strtotime("sunday this week -{$i} weeks"));
-    $visitorWeeklyLabels[] = date('M d', strtotime($startOfWeek)) . ' - ' . date('M d', strtotime($endOfWeek));
-    // Query untuk weekly unique logins
+    $visitorWeeklyLabels[] = date('d M', strtotime($startOfWeek)) . ' - ' . date('d M', strtotime($endOfWeek));
+    // Query untuk weekly unique logins (dengan zona waktu sesi yang sudah diatur)
     $sqlWeeklyVisitors = "SELECT COUNT(DISTINCT id_pelanggan) AS weekly_visitors
                           FROM pengguna
-                          WHERE DATE(last_login) BETWEEN '$startOfWeek' AND '$endOfWeek'";
+                          WHERE last_login BETWEEN '$startOfWeek 00:00:00' AND '$endOfWeek 23:59:59'";
     $resultWeeklyVisitors = mysqli_query($conn, $sqlWeeklyVisitors);
     $rowWeeklyVisitors = mysqli_fetch_assoc($resultWeeklyVisitors);
     $visitorWeeklyData[] = $rowWeeklyVisitors['weekly_visitors'] ? (int)$rowWeeklyVisitors['weekly_visitors'] : 0;
@@ -170,7 +208,7 @@ $visitorMonthlyLabels = [];
 for ($i = 11; $i >= 0; $i--) {
     $month = date('Y-m', strtotime("-$i months"));
     $visitorMonthlyLabels[] = date('M Y', strtotime($month . '-01'));
-    // Query untuk monthly unique logins
+    // Query untuk monthly unique logins (dengan zona waktu sesi yang sudah diatur)
     $sqlMonthlyVisitors = "SELECT COUNT(DISTINCT id_pelanggan) AS monthly_visitors
                            FROM pengguna
                            WHERE DATE_FORMAT(last_login, '%Y-%m') = '$month'";
@@ -180,10 +218,14 @@ for ($i = 11; $i >= 0; $i--) {
 }
 
 
-// Product Performance (Top 5 Products by Quantity Sold) - tidak ada perubahan
+// Product Performance (Top 5 Products by Quantity Sold) - Tidak ada perubahan logika
 $productPerformanceData = [];
 $productPerformanceLabels = [];
-$sqlProductPerformance = "SELECT p.namaproduk, SUM(dp.jumlah) AS total_kuantitas_terjual FROM detail_pesanan dp JOIN produk p ON dp.idproduk = p.idproduk GROUP BY p.idproduk, p.namaproduk ORDER BY total_kuantitas_terjual DESC LIMIT 5";
+$sqlProductPerformance = "SELECT p.namaproduk, SUM(dp.jumlah) AS total_kuantitas_terjual 
+                          FROM detail_pesanan dp 
+                          JOIN produk p ON dp.idproduk = p.idproduk 
+                          GROUP BY p.idproduk, p.namaproduk 
+                          ORDER BY total_kuantitas_terjual DESC LIMIT 5";
 $resultProductPerformance = mysqli_query($conn, $sqlProductPerformance);
 
 if ($resultProductPerformance) {
@@ -194,19 +236,19 @@ if ($resultProductPerformance) {
 } else {
     $productPerformanceLabels = ['No Data'];
     $productPerformanceData = [0];
-    // error_log("Error mengambil data Product Performance: " . mysqli_error($conn));
+    error_log("Error mengambil data Product Performance: " . mysqli_error($conn));
 }
 
-// Order Status - tidak ada perubahan
+// Order Status - Tidak ada perubahan logika
 $orderStatusData = [];
 $orderStatusLabels = [];
 $orderStatusColors = [
-    'menunggupembayaran' => 'rgba(255, 159, 64, 0.8)',
-    'pembayarandikonfirmasi' => 'rgba(54, 162, 235, 0.8)',
-    'sudahsampai' => 'rgba(75, 192, 192, 0.8)',
-    'dibatalkan' => 'rgba(255, 99, 132, 0.8)',
-    'diproses' => 'rgba(153, 102, 255, 0.8)',
-    'dikirim' => 'rgba(201, 203, 207, 0.8)',
+    'menunggupembayaran' => 'rgba(255, 159, 64, 0.8)', // Orange
+    'pembayarandikonfirmasi' => 'rgba(54, 162, 235, 0.8)', // Blue
+    'sudahsampai' => 'rgba(75, 192, 192, 0.8)', // Green
+    'dibatalkan' => 'rgba(255, 99, 132, 0.8)', // Red
+    'diproses' => 'rgba(153, 102, 255, 0.8)', // Purple
+    'dikirim' => 'rgba(201, 203, 207, 0.8)', // Grey
 ];
 $statusBackgroundColors = [];
 
@@ -222,12 +264,13 @@ if ($resultOrderStatus) {
         $statusKey = strtolower(str_replace(' ', '', $row['nama_status']));
         $orderStatusLabels[] = ucfirst($row['nama_status']);
         $orderStatusData[] = (int)$row['count_status'];
-        $statusBackgroundColors[] = $orderStatusColors[$statusKey] ?? 'rgba(201, 203, 207, 0.8)';
+        $statusBackgroundColors[] = $orderStatusColors[$statusKey] ?? 'rgba(201, 203, 207, 0.8)'; // Fallback color
     }
 } else {
     $orderStatusLabels = ['No Data'];
     $orderStatusData = [0];
     $statusBackgroundColors = ['rgba(201, 203, 207, 0.8)'];
+    error_log("Error mengambil data Order Status: " . mysqli_error($conn));
 }
 
 // Menggabungkan semua data chart ke dalam satu array untuk di-encode ke JSON
@@ -314,7 +357,8 @@ if (isset($_GET['status_updated']) && $_GET['status_updated'] === 'true') {
             <i class='bx bxs-calendar-check'></i>
             <span class="text">
                 <h3 id="newOrdersCount"><?php echo $newOrdersCount; ?></h3>
-                <p>Daily Visitors (Today)</p> </span>
+                <p>Daily Visitors (Today)</p>
+            </span>
         </li>
         <li>
             <i class='bx bxs-group'></i>
@@ -404,30 +448,30 @@ if (isset($_GET['status_updated']) && $_GET['status_updated'] === 'true') {
                             $orderTotal = "Rp " . number_format($row['total_harga'], 0, ',', '.');
                             $statusClass = '';
                             // Gunakan nama_status untuk menentukan kelas CSS
-                            $status_name_for_class = strtolower(str_replace(' ', '', $row['nama_status'])); // Menghilangkan spasi juga
+                            $status_name_for_class = strtolower(str_replace(' ', '', $row['nama_status']));
 
                             // Sesuaikan kelas CSS berdasarkan nama status yang sudah di-format
                             switch ($status_name_for_class) {
                                 case 'menunggupembayaran':
-                                    $statusClass = 'status pending'; // Contoh: 'status pending'
+                                    $statusClass = 'status pending';
                                     break;
                                 case 'pembayarandikonfirmasi':
-                                    $statusClass = 'status confirmed'; // Contoh: 'status confirmed'
+                                    $statusClass = 'status confirmed';
                                     break;
                                 case 'sudahsampai':
-                                    $statusClass = 'status completed'; // Contoh: 'status completed'
+                                    $statusClass = 'status completed';
                                     break;
                                 case 'dibatalkan':
-                                    $statusClass = 'status cancelled'; // Contoh: 'status cancelled'
+                                    $statusClass = 'status cancelled';
                                     break;
                                 case 'diproses':
-                                    $statusClass = 'status process'; // Contoh: 'status process'
+                                    $statusClass = 'status process';
                                     break;
                                 case 'dikirim':
-                                    $statusClass = 'status shipped'; // Contoh: 'status shipped'
+                                    $statusClass = 'status shipped';
                                     break;
                                 default:
-                                    $statusClass = 'status default'; // Default jika tidak ada yang cocok
+                                    $statusClass = 'status default';
                                     break;
                             }
                             ?>
@@ -439,9 +483,7 @@ if (isset($_GET['status_updated']) && $_GET['status_updated'] === 'true') {
                                 <td><span class="<?php echo $statusClass; ?>"><?php echo htmlspecialchars($row['nama_status']); ?></span></td>
                                 <td><?php echo $orderTotal; ?></td>
                                 <td>
-                                    <?php
-                                    // Tampilkan bukti pembayaran jika ada
-                                    if (!empty($row['bukti_bayar'])): ?>
+                                    <?php if (!empty($row['bukti_bayar'])): ?>
                                         <a href="../photos/<?php echo htmlspecialchars($row['bukti_bayar']); ?>" target="_blank">Lihat</a>
                                     <?php else: ?>
                                         Tidak ada
@@ -554,13 +596,12 @@ if (isset($_GET['status_updated']) && $_GET['status_updated'] === 'true') {
                     newData = CHART_DATA.sales9Months.data;
                     newLabelText = 'Sales (Last 9 Months)';
                     break;
-                case 'yearly': // Ini akan sama dengan monthly karena data yearly kita ambil dari monthly (12 bulan)
-                    newLabels = CHART_DATA.salesYearly.labels; // Menggunakan alias
-                    newData = CHART_DATA.salesYearly.data;      // Menggunakan alias
+                case 'yearly':
+                    newLabels = CHART_DATA.salesYearly.labels;
+                    newData = CHART_DATA.salesYearly.data;
                     newLabelText = 'Yearly Sales (Last 12 Months)';
                     break;
                 default:
-                    // Fallback jika ada nilai yang tidak terduga
                     newLabels = CHART_DATA.salesMonthly.labels;
                     newData = CHART_DATA.salesMonthly.data;
                     newLabelText = 'Monthly Sales';
@@ -572,7 +613,6 @@ if (isset($_GET['status_updated']) && $_GET['status_updated'] === 'true') {
             salesChart.update();
         });
     }
-
 
     // --- VISITOR STATISTICS CHART ---
     const visitorCtx = document.getElementById('visitorChart');
@@ -613,7 +653,7 @@ if (isset($_GET['status_updated']) && $_GET['status_updated'] === 'true') {
                                     label += ': ';
                                 }
                                 if (context.parsed.y !== null) {
-                                    label += context.parsed.y.toLocaleString('id-ID') + ' users'; // Format untuk jumlah user
+                                    label += context.parsed.y.toLocaleString('id-ID') + ' users';
                                 }
                                 return label;
                             }
@@ -647,17 +687,16 @@ if (isset($_GET['status_updated']) && $_GET['status_updated'] === 'true') {
                     newLabelText = 'Monthly Unique Logins';
                     break;
                 default:
-                    newLabels = CHART_DATA.visitorsDaily.labels; // Fallback
+                    newLabels = CHART_DATA.visitorsDaily.labels;
                     newData = CHART_DATA.visitorsDaily.data;
                     newLabelText = 'Daily Unique Logins';
             }
             visitorChart.data.labels = newLabels;
             visitorChart.data.datasets[0].data = newData;
             visitorChart.data.datasets[0].label = newLabelText;
-            visitorChart.update(); // Perbarui grafik
+            visitorChart.update();
         });
     }
-    // --- AKHIR MODIFIKASI: VISITOR STATISTICS CHART ---
 
     // --- PRODUCT PERFORMANCE CHART ---
     const productCtx = document.getElementById('productChart');
@@ -676,7 +715,7 @@ if (isset($_GET['status_updated']) && $_GET['status_updated'] === 'true') {
                 }]
             },
             options: {
-                indexAxis: 'y',
+                indexAxis: 'y', // Membuat bar chart horizontal
                 responsive: true,
                 maintainAspectRatio: false,
                 scales: {
@@ -726,7 +765,7 @@ if (isset($_GET['status_updated']) && $_GET['status_updated'] === 'true') {
         });
     }
 
-    // Panggil resize untuk semua chart yang terinisialisasi
+    // Panggil resize untuk semua chart yang terinisialisasi saat window di-resize
     window.addEventListener('resize', () => {
         if (salesChart) salesChart.resize();
         if (visitorChart) visitorChart.resize();
@@ -736,6 +775,9 @@ if (isset($_GET['status_updated']) && $_GET['status_updated'] === 'true') {
 </script>
 
 <?php
+// Pastikan koneksi ditutup setelah semua operasi selesai
+if ($conn) {
+    mysqli_close($conn);
+}
 include '../views/footeradmin.php';
-mysqli_close($conn);
 ?>

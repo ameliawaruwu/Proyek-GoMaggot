@@ -1,6 +1,6 @@
 <?php
-
-require_once '../configdb.php'; // 
+include '../Logic/update/auth.php';
+include '../configdb.php'; // 
 $message = '';
 $message_type = ''; 
 $galeri = null;
@@ -116,10 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id_galeri'])) {
 
 mysqli_close($conn); // Tutup koneksi database setelah semua operasi PHP selesai
 
-// =================================================================================================
-// Bagian HTML untuk tampilan konfirmasi
-// Bagian ini hanya akan dirender jika tidak ada redirect yang terjadi sebelumnya (yaitu, saat GET)
-// =================================================================================================
+
 include '../views/headeradmin.php';
 ?>
 

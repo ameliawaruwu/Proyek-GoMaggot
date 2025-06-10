@@ -1,4 +1,5 @@
-<?php include '../partials/headers.php';  ?>
+<?php
+include '../partials/headers.php';  ?>
 <?php include '../logic/update/auth.php'; ?>
 
 <link rel="stylesheet" href="/MAGGOT/css/portofolios.css">
@@ -58,4 +59,4 @@
 </div>
 
 <?php include '../partials/footer.php';  ?>
-<script src="../Esa-HTML/js/galeri.js"></script>
+<script src="../Admin-HTML/js/galeri.js"></script>

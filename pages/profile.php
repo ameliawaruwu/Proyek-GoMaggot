@@ -1,5 +1,4 @@
 <?php
-// Simulasi data user (biasanya dari database)
 $user = [
   'photo' => 'profile.jpg',
   'nickname' => 'coolkid21',

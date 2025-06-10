@@ -1,7 +1,7 @@
 <?php
+include '../logic/update/auth.php'; 
 session_start();
 header('Content-Type: application/json');
-
 include '../configdb.php'; // Sesuaikan path jika perlu
 
 // Ambil data JSON dari body request

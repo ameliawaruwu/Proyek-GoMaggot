@@ -46,26 +46,12 @@
                     <span class="text">User</span>
                 </a>
             </li>
-             <li class="active">
-                <a href="reviewsadmin.php">
-                    <i class='bx  bx-star-square'></i> 
-                    <span class="text">Reviews</span>
-                </a>
-            </li>
             <li>
                 <a href="chat.php">
                     <i class='bx bxs-message-dots'></i>
                     <span class="text">Chat</span>
                 </a>
             </li>
-            <!--
-            <li>
-                <a href="admin.html">
-                    <i class='bx bxs-group'></i>
-                    <span class="text">Admin</span>
-                </a>
-            </li>
-            -->
 
         </ul>
     </section>

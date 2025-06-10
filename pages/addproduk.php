@@ -1,5 +1,5 @@
 <?php 
-
+ include '../logic/update/auth.php'; 
 include '../configdb.php';
 
 // Ambil data kategori untuk dropdown

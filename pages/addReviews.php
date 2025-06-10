@@ -1,9 +1,6 @@
 <?php
-// Pastikan authentication logic di sini jika diperlukan
-// include '../Logic/update/auth.php'; 
-include '../views/headeradmin.php'; // Menggunakan headeradmin.php yang sama
-// Pastikan file koneksi database sudah di-include di headeradmin.php atau di sini
-// require_once '../config/db_connection.php'; 
+ include '../logic/update/auth.php'; 
+include '../views/headeradmin.php'; 
 ?>
 <link rel="stylesheet" href="../Admin-HTML/css/admin.css">
 <link rel="stylesheet" href="../Admin-HTML/css/adminreviews.css">

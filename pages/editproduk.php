@@ -1,5 +1,5 @@
 <?php 
-
+include '../Logic/update/auth.php';
 include '../configdb.php'; // Koneksi database
 
 // Cek apakah ID produk tersedia

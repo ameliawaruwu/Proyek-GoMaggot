@@ -1,5 +1,4 @@
 <?php
-include '../Logic/update/auth.php'; 
 // Pastikan semua error dilaporkan untuk debugging selama pengembangan
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
