@@ -28,8 +28,7 @@ if ($resultDailyVisitorsCard) {
     // error_log("Error mengambil data Daily Visitors untuk card: " . mysqli_error($conn));
 }
 
-// --- 2. Ambil Data Total Registered Users (Untuk card atas) ---
-// Ini tetap menghitung total pengguna terdaftar, bukan harian
+/////
 $sqlTotalRegisteredUsers = "SELECT COUNT(*) AS total_visitors FROM pengguna";
 $resultTotalRegisteredUsers = mysqli_query($conn, $sqlTotalRegisteredUsers);
 
