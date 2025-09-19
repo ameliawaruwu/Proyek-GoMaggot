@@ -1,13 +1,8 @@
 <?php include '../views/header.php'; 
 include '../Logic/update/auth.php'; 
-<<<<<<< HEAD
-
-  <link rel="stylesheet" href="../Admin-HTML/css/halgaleri.css">
-=======
 ?>
 
 <link rel="stylesheet" href="../Admin-HTML/css/halgaleri.css">
->>>>>>> ce5ec8126cfcf8cc0467651fa803dc3855ca4986
   
 
 <div class="container">
