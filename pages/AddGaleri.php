@@ -5,6 +5,7 @@ include '../configdb.php';
 $message = '';
 $message_type = '';
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $deskripsi = $_POST['deskripsi'] ?? '';
     $gambar = $_FILES['gambar'] ?? null;
@@ -15,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0777, true);
         }
-
+        
         $fileName = uniqid() . '_' . basename($gambar['name']); // Nama file unik
         $targetFilePath = $uploadDir . $fileName;
         $imageFileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
