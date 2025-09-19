@@ -1,6 +1,6 @@
 <?php
  include '../logic/update/auth.php'; 
-include '../configdb.php'; /
+include '../configdb.php'; 
 
 $message = '';
 $message_type = '';
